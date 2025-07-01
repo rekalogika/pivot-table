@@ -11,13 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Contracts\Tree;
+namespace Rekalogika\PivotTable\Contracts\Result;
 
-interface TreeNode
-{
-    public function getKey(): string;
-
-    public function getLegend(): mixed;
-
-    public function getItem(): mixed;
-}
+/**
+ * @extends \Traversable<Value>
+ */
+interface Values extends \Traversable, \Countable {}

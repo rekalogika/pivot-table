@@ -11,9 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Contracts\Tree;
+namespace Rekalogika\PivotTable\Contracts\Result;
 
-interface TreeNode
+interface Field
 {
     public function getKey(): string;
 

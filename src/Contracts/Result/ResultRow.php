@@ -11,13 +11,11 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Contracts\Tree;
+namespace Rekalogika\PivotTable\Contracts\Result;
 
-interface TreeNode
+interface ResultRow
 {
-    public function getKey(): string;
+    public function getTuple(): Tuple;
 
-    public function getLegend(): mixed;
-
-    public function getItem(): mixed;
+    public function getValues(): Values;
 }
