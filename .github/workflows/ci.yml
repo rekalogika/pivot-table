@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '13 14 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php: [ '8.2', '8.3', '8.4' ]
+        dep: [highest,lowest]
+
+    name: ${{ matrix.dep }} deps, PHP ${{ matrix.php }}, ${{ matrix.operating-system }}
+
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      env:
+        GITHUB_AUTH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: intl
+        tools: flex, phive
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    
+    - name: phive
+      run: phive install --trust-gpg-keys E82B2FB314E9906E
+      env:
+        GITHUB_AUTH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+    - name: Install dependencies
+      uses: ramsey/composer-install@v3
+      with:
+        dependency-versions: ${{ matrix.dep }}
+        composer-options: --prefer-dist --no-progress --no-scripts --ignore-platform-reqs
+
+    - name: Run psalm
+      run: vendor/bin/psalm
+      if: matrix.dep == 'highest'
+
+    - name: Run phpstan
+      run: vendor/bin/phpstan analyse
+      if: matrix.dep == 'highest'
+
+    - name: Composer dump
+      run: composer dump-autoload --dry-run --optimize
+
+    - name: Validate php-cs-fixer
+      run: |
+        PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer check --allow-risky=yes
+
+    - name: Run phpunit
+      run: |
+        vendor/bin/phpunit

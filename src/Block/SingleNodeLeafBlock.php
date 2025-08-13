@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of rekalogika/analytics package.
+ * This file is part of rekalogika/pivot-table package.
  *
  * (c) Priyadi Iman Nurcahyo <https://rekalogika.dev>
  *
