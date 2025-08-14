@@ -11,13 +11,14 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
 use Rekalogika\PivotTable\HtmlTable\Table;
 use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 /**
  * @implements \IteratorAggregate<DefaultTableSection>
+ * @internal
  */
 final readonly class DefaultTable implements \Countable, Table, \IteratorAggregate
 {

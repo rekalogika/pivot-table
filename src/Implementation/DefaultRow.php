@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
 use Rekalogika\PivotTable\HtmlTable\Cell;
 use Rekalogika\PivotTable\HtmlTable\Row;
@@ -19,6 +19,7 @@ use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 /**
  * @implements \IteratorAggregate<Cell>
+ * @internal
  */
 final readonly class DefaultRow implements \IteratorAggregate, Row
 {

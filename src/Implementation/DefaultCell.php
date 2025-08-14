@@ -11,10 +11,13 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
 use Rekalogika\PivotTable\HtmlTable\Cell;
 
+/**
+ * @internal
+ */
 abstract readonly class DefaultCell implements Cell
 {
     final public function __construct(
