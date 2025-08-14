@@ -17,6 +17,12 @@
     </projectFiles>
 
     <issueHandlers>
+        <DeprecatedInterface>
+            <errorLevel type="suppress">
+                <file name="src/Util/ResultSetToTableTransformer.php" />
+                <directory name="src/Contracts/Result" />
+            </errorLevel>
+        </DeprecatedInterface>
     </issueHandlers>
 
     <plugins>

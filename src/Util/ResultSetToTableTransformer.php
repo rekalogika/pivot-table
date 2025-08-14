@@ -25,6 +25,9 @@ use Rekalogika\PivotTable\Implementation\DefaultTable;
 use Rekalogika\PivotTable\Implementation\DefaultTableBody;
 use Rekalogika\PivotTable\Implementation\DefaultTableHeader;
 
+/**
+ * @deprecated
+ */
 final class ResultSetToTableTransformer
 {
     private DefaultTableHeader $tableHeader;

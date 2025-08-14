@@ -15,5 +15,6 @@ namespace Rekalogika\PivotTable\Contracts\Result;
 
 /**
  * @extends \Traversable<Value>
+ * @deprecated
  */
 interface Values extends \Traversable, \Countable {}

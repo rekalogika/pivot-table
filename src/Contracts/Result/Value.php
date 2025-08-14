@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Contracts\Result;
 
+/**
+ * @deprecated
+ */
 interface Value
 {
     public function getKey(): string;
