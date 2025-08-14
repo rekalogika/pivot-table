@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\BlockGroup;
 
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
 
 final class VerticalBlockGroup extends BlockGroup
 {

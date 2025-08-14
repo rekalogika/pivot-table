@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\BranchBlock;
 
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
 
 final class EmptyBlock extends BranchBlock
 {

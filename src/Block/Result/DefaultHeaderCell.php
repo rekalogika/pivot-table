@@ -11,22 +11,22 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Implementation\Table;
+namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\FooterCell;
+use Rekalogika\PivotTable\Table\HeaderCell;
 use Rekalogika\PivotTable\Table\TableVisitor;
 
-final readonly class DefaultFooterHeaderCell extends DefaultCell implements FooterCell
+final readonly class DefaultHeaderCell extends DefaultCell implements HeaderCell
 {
     #[\Override]
     public function accept(TableVisitor $visitor): mixed
     {
-        return $visitor->visitFooterCell($this);
+        return $visitor->visitHeaderCell($this);
     }
 
     #[\Override]
     public function getTagName(): string
     {
-        return 'td';
+        return 'th';
     }
 }

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Rekalogika\PivotTable\Block\BlockGroup;
 
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
-use Rekalogika\PivotTable\Implementation\Table\DefaultHeaderCell;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultHeaderCell;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
 
 final class HorizontalBlockGroup extends BlockGroup
 {

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Implementation\Table;
+namespace Rekalogika\PivotTable\Block\Result;
 
 use Rekalogika\PivotTable\Table\Row;
 use Rekalogika\PivotTable\Table\RowGroup;

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\LeafBlock;
 
-use Rekalogika\PivotTable\Implementation\Table\DefaultDataCell;
-use Rekalogika\PivotTable\Implementation\Table\DefaultHeaderCell;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultDataCell;
+use Rekalogika\PivotTable\Block\Result\DefaultHeaderCell;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
 
 final class PivotLeafBlock extends LeafBlock
 {

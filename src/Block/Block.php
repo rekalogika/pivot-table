@@ -20,12 +20,12 @@ use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\LeafBlock\NormalLeafBlock;
 use Rekalogika\PivotTable\Block\LeafBlock\PivotLeafBlock;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
-use Rekalogika\PivotTable\Implementation\Table\DefaultContext;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTable;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTableBody;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTableFooter;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTableHeader;
+use Rekalogika\PivotTable\Block\Result\DefaultContext;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultTable;
+use Rekalogika\PivotTable\Block\Result\DefaultTableBody;
+use Rekalogika\PivotTable\Block\Result\DefaultTableFooter;
+use Rekalogika\PivotTable\Block\Result\DefaultTableHeader;
 
 abstract class Block implements \Stringable
 {

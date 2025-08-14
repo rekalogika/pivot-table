@@ -15,7 +15,7 @@ namespace Rekalogika\PivotTable\Block\BranchBlock;
 
 use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
 
 final class RootBlock extends BranchBlock
 {
