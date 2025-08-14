@@ -16,27 +16,51 @@ namespace Rekalogika\PivotTable\ArrayTable;
 final class ArrayTableFactory
 {
     /**
+     * @param iterable<array<string,mixed>> $input
      * @param list<string> $dimensionFields
      * @param list<string> $measureFields
      * @param array<string,mixed> $legends Key is any dimension and measure
      * field, value is the legend value. Key can also be `@values` to indicate
      * the legend of the measure dimension.
-     *
      */
-    public function __construct(
+    public static function createTable(
+        iterable $input,
+        array $dimensionFields,
+        array $measureFields,
+        string $groupingField,
+        array $legends,
+    ): ArrayTable {
+        $self = new self(
+            input: $input,
+            dimensionFields: $dimensionFields,
+            measureFields: $measureFields,
+            groupingField: $groupingField,
+            legends: $legends,
+        );
+
+        return $self->getOutput();
+    }
+
+    /**
+     * @param iterable<array<string,mixed>> $input
+     * @param list<string> $dimensionFields
+     * @param list<string> $measureFields
+     * @param array<string,mixed> $legends Key is any dimension and measure
+     * field, value is the legend value. Key can also be `@values` to indicate
+     * the legend of the measure dimension.
+     */
+    private function __construct(
+        private readonly iterable $input,
         private readonly array $dimensionFields,
         private readonly array $measureFields,
         private readonly string $groupingField,
         private readonly array $legends,
     ) {}
 
-    /**
-     * @param iterable<array<string,mixed>> $input
-     */
-    public function create(iterable $input): ArrayTable
+    private function getOutput(): ArrayTable
     {
         return new ArrayTable(
-            rows: $this->createRows($input),
+            rows: $this->createRows($this->input),
             legends: $this->legends,
         );
     }
@@ -73,7 +97,7 @@ final class ArrayTableFactory
      * @param iterable<array<string,mixed>> $input
      * @return iterable<ArrayRow>
      */
-    public function createRows(iterable $input): iterable
+    private function createRows(iterable $input): iterable
     {
         /** @psalm-suppress MixedAssignment */
         foreach ($input as $row) {
@@ -85,7 +109,7 @@ final class ArrayTableFactory
     /**
      * @param array<string,mixed> $input
      */
-    public function createRow(array $input): ArrayRow
+    private function createRow(array $input): ArrayRow
     {
         $grouping = $input[$this->groupingField]
             ?? throw new \InvalidArgumentException("Missing grouping field: {$this->groupingField}");
