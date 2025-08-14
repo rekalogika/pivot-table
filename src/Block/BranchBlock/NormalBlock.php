@@ -11,14 +11,13 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block;
+namespace Rekalogika\PivotTable\Block\BranchBlock;
 
 use Rekalogika\PivotTable\Implementation\Table\DefaultDataCell;
 use Rekalogika\PivotTable\Implementation\Table\DefaultHeaderCell;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRow;
 use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
 
-final class NormalLeafBlock extends LeafBlock
+final class NormalBlock extends BranchBlock
 {
     #[\Override]
     public function getHeaderRows(): DefaultRows
@@ -29,11 +28,10 @@ final class NormalLeafBlock extends LeafBlock
         $cell = new DefaultHeaderCell(
             name: $currentKey,
             content: $this->getCube()->getLegend($currentKey),
-            columnSpan: 2,
             context: $context,
         );
 
-        return DefaultRows::createFromCell($cell, $context);
+        return $cell->appendRowsRight($this->getChildrenBlockGroup()->getHeaderRows());
     }
 
     #[\Override]
@@ -42,20 +40,12 @@ final class NormalLeafBlock extends LeafBlock
         $context = $this->getElementContext();
         $currentKey = $this->getContext()->getCurrentKey();
 
-        $name = new DefaultDataCell(
+        $cell = new DefaultDataCell(
             name: $currentKey,
             content: $this->getCube()->getMember($currentKey),
             context: $context,
         );
 
-        $value = new DefaultDataCell(
-            name: $currentKey,
-            content: $this->getCube()->getValue(),
-            context: $context,
-        );
-
-        $row = new DefaultRow([$name, $value], $context);
-
-        return new DefaultRows([$row], $context);
+        return $cell->appendRowsRight($this->getChildrenBlockGroup()->getDataRows());
     }
 }

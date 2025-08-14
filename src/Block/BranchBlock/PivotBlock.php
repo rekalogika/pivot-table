@@ -11,13 +11,13 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block;
+namespace Rekalogika\PivotTable\Block\BranchBlock;
 
 use Rekalogika\PivotTable\Implementation\Table\DefaultDataCell;
 use Rekalogika\PivotTable\Implementation\Table\DefaultHeaderCell;
 use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
 
-final class PivotLeafBlock extends LeafBlock
+final class PivotBlock extends BranchBlock
 {
     #[\Override]
     public function getHeaderRows(): DefaultRows
@@ -28,34 +28,28 @@ final class PivotLeafBlock extends LeafBlock
         if (
             $this->getContext()->isLegendSkipped($currentKey)
         ) {
-            $cell = new DefaultHeaderCell(
+            $valueCell = new DefaultHeaderCell(
                 name: $currentKey,
                 content: $this->getCube()->getMember($currentKey),
                 context: $context,
             );
         } else {
-            $cell = new DefaultDataCell(
+            $valueCell = new DefaultDataCell(
                 name: $currentKey,
                 content: $this->getCube()->getMember($currentKey),
                 context: $context,
             );
         }
 
-        return DefaultRows::createFromCell($cell, $context);
+        $rows = $this->getChildrenBlockGroup()->getHeaderRows();
+        $rows = $valueCell->appendRowsBelow($rows);
+
+        return $rows;
     }
 
     #[\Override]
     public function getDataRows(): DefaultRows
     {
-        $context = $this->getElementContext();
-        $currentKey = $this->getContext()->getCurrentKey();
-
-        $cell = new DefaultDataCell(
-            name: $currentKey,
-            content: $this->getCube()->getValue(),
-            context: $context,
-        );
-
-        return DefaultRows::createFromCell($cell, $context);
+        return $this->getChildrenBlockGroup()->getDataRows();
     }
 }

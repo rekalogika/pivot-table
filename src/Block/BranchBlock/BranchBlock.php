@@ -11,7 +11,13 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block;
+namespace Rekalogika\PivotTable\Block\BranchBlock;
+
+use Rekalogika\PivotTable\Block\BlockGroup\BlockGroup;
+use Rekalogika\PivotTable\Block\BlockGroup\EmptyBlockGroup;
+use Rekalogika\PivotTable\Block\BlockGroup\HorizontalBlockGroup;
+use Rekalogika\PivotTable\Block\BlockGroup\VerticalBlockGroup;
+use Rekalogika\PivotTable\Block\NodeBlock;
 
 abstract class BranchBlock extends NodeBlock
 {

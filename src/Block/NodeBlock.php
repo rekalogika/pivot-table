@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block;
 
+use Rekalogika\PivotTable\Block\BlockGroup\BlockGroup;
+use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
 
 abstract class NodeBlock extends Block

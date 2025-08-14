@@ -11,18 +11,12 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block;
+namespace Rekalogika\PivotTable\Block\BranchBlock;
 
 use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
 
-final class EmptyBlockGroup extends BlockGroup
+final class EmptyBlock extends BranchBlock
 {
-    #[\Override]
-    protected function createPrototypeCubes(): array
-    {
-        return [];
-    }
-
     #[\Override]
     public function getHeaderRows(): DefaultRows
     {

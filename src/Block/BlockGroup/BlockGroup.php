@@ -11,8 +11,10 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block;
+namespace Rekalogika\PivotTable\Block\BlockGroup;
 
+use Rekalogika\PivotTable\Block\Block;
+use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
 
 abstract class BlockGroup extends Block

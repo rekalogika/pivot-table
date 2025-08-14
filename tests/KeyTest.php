@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\Analytics\Tests\UnitTests\PivotTable;
 
 use PHPUnit\Framework\TestCase;
-use Rekalogika\PivotTable\Block\Keys;
+use Rekalogika\PivotTable\Block\Context\Keys;
 
 final class KeyTest extends TestCase
 {

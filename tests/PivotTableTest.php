@@ -35,6 +35,8 @@ final class PivotTableTest extends TestCase
         $data = json_decode($fileContent, true);
         $this->assertIsArray($data);
 
+        /** @var list<array<string,mixed>> $data */
+
         $tableFactory = new ArrayTableFactory(
             dimensionFields: ['name', 'country', 'month'],
             measureFields: ['count', 'sum'],

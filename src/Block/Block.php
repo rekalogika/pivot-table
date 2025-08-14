@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block;
 
+use Rekalogika\PivotTable\Block\BranchBlock\NormalBlock;
+use Rekalogika\PivotTable\Block\BranchBlock\PivotBlock;
+use Rekalogika\PivotTable\Block\BranchBlock\RootBlock;
+use Rekalogika\PivotTable\Block\Context\BlockContext;
+use Rekalogika\PivotTable\Block\LeafBlock\NormalLeafBlock;
+use Rekalogika\PivotTable\Block\LeafBlock\PivotLeafBlock;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
 use Rekalogika\PivotTable\Implementation\Table\DefaultContext;
 use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
