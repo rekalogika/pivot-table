@@ -28,7 +28,7 @@ use Rekalogika\PivotTable\Implementation\DefaultTableHeader;
 
 abstract class Block implements \Stringable
 {
-    private ?DefaultContext $elementContext = null;
+    private ?ElementContext $elementContext = null;
 
     protected function __construct(
         private readonly BlockContext $context,
@@ -44,9 +44,9 @@ abstract class Block implements \Stringable
         );
     }
 
-    protected function getElementContext(): DefaultContext
+    protected function getElementContext(): ElementContext
     {
-        return $this->elementContext ??= new DefaultContext(
+        return $this->elementContext ??= new ElementContext(
             depth: $this->getLevel(),
             subtotalDepth: $this->getContext()->getSubtotalDepth(),
             generatingBlock: $this,

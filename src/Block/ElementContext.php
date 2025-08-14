@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block;
 
-final readonly class DefaultContext
+final readonly class ElementContext
 {
     public static function createFlat(): self
     {

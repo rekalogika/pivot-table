@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Util;
 
-use Rekalogika\PivotTable\Block\DefaultContext;
+use Rekalogika\PivotTable\Block\ElementContext;
 use Rekalogika\PivotTable\Contracts\Result\ResultRow;
 use Rekalogika\PivotTable\Contracts\Result\ResultSet;
 use Rekalogika\PivotTable\HtmlTable\Table;
@@ -29,7 +29,7 @@ final class ResultSetToTableTransformer
 {
     private DefaultTableHeader $tableHeader;
     private DefaultTableBody $tableBody;
-    private DefaultContext $context;
+    private ElementContext $context;
 
     public static function transform(ResultSet $resultSet): Table
     {
@@ -38,7 +38,7 @@ final class ResultSetToTableTransformer
 
     private function __construct(ResultSet $resultSet)
     {
-        $this->context = DefaultContext::createFlat();
+        $this->context = ElementContext::createFlat();
 
         $tupleCount = $this->getMaxTupleCount($resultSet);
 
