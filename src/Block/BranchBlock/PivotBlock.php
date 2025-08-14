@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\BranchBlock;
 
-use Rekalogika\PivotTable\Block\Result\DefaultDataCell;
-use Rekalogika\PivotTable\Block\Result\DefaultHeaderCell;
-use Rekalogika\PivotTable\Block\Result\DefaultRows;
+use Rekalogika\PivotTable\Implementation\DefaultDataCell;
+use Rekalogika\PivotTable\Implementation\DefaultHeaderCell;
+use Rekalogika\PivotTable\Implementation\DefaultRows;
 
 final class PivotBlock extends BranchBlock
 {

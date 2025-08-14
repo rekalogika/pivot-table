@@ -20,7 +20,7 @@ interface Element
 {
     public function getTagName(): string;
 
-    public function getContext(): ElementContext;
+    public function getContext(): mixed;
 
     /**
      * @template T

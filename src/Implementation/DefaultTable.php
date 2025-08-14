@@ -11,14 +11,14 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
-use Rekalogika\PivotTable\HtmlTable\ElementContext;
 use Rekalogika\PivotTable\HtmlTable\Table;
 use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 /**
  * @implements \IteratorAggregate<DefaultTableSection>
+ * @internal
  */
 final readonly class DefaultTable implements \Countable, Table, \IteratorAggregate
 {
@@ -34,7 +34,7 @@ final readonly class DefaultTable implements \Countable, Table, \IteratorAggrega
      */
     public function __construct(
         iterable $rowGroups,
-        private DefaultContext $context,
+        private mixed $context,
     ) {
         $newRowGroups = [];
         $newRows = [];
@@ -52,7 +52,7 @@ final readonly class DefaultTable implements \Countable, Table, \IteratorAggrega
     }
 
     #[\Override]
-    public function getContext(): ElementContext
+    public function getContext(): mixed
     {
         return $this->context;
     }

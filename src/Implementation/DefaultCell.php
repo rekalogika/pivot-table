@@ -11,17 +11,19 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
-use Rekalogika\PivotTable\Block\Block;
 use Rekalogika\PivotTable\HtmlTable\Cell;
 
+/**
+ * @internal
+ */
 abstract readonly class DefaultCell implements Cell
 {
     final public function __construct(
         private string $name,
         private mixed $content,
-        private DefaultContext $context,
+        private mixed $context,
         private int $columnSpan = 1,
         private int $rowSpan = 1,
     ) {}
@@ -38,14 +40,9 @@ abstract readonly class DefaultCell implements Cell
     }
 
     #[\Override]
-    final public function getContext(): DefaultContext
+    final public function getContext(): mixed
     {
         return $this->context;
-    }
-
-    final public function getGeneratingBlock(): ?Block
-    {
-        return $this->context->getGeneratingBlock();
     }
 
     #[\Override]

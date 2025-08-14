@@ -11,15 +11,15 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
 use Rekalogika\PivotTable\HtmlTable\Cell;
-use Rekalogika\PivotTable\HtmlTable\ElementContext;
 use Rekalogika\PivotTable\HtmlTable\Row;
 use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 /**
  * @implements \IteratorAggregate<Cell>
+ * @internal
  */
 final readonly class DefaultRow implements \IteratorAggregate, Row
 {
@@ -33,14 +33,14 @@ final readonly class DefaultRow implements \IteratorAggregate, Row
      */
     public function __construct(
         array $cells,
-        private DefaultContext $context,
+        private mixed $context,
     ) {
         // $this->cells = $this->mergeCells($cells);
         $this->cells = $cells;
     }
 
     #[\Override]
-    public function getContext(): ElementContext
+    public function getContext(): mixed
     {
         return $this->context;
     }

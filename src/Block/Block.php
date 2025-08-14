@@ -20,16 +20,15 @@ use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\LeafBlock\NormalLeafBlock;
 use Rekalogika\PivotTable\Block\LeafBlock\PivotLeafBlock;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
-use Rekalogika\PivotTable\Block\Result\DefaultContext;
-use Rekalogika\PivotTable\Block\Result\DefaultRows;
-use Rekalogika\PivotTable\Block\Result\DefaultTable;
-use Rekalogika\PivotTable\Block\Result\DefaultTableBody;
-use Rekalogika\PivotTable\Block\Result\DefaultTableFooter;
-use Rekalogika\PivotTable\Block\Result\DefaultTableHeader;
+use Rekalogika\PivotTable\Implementation\DefaultRows;
+use Rekalogika\PivotTable\Implementation\DefaultTable;
+use Rekalogika\PivotTable\Implementation\DefaultTableBody;
+use Rekalogika\PivotTable\Implementation\DefaultTableFooter;
+use Rekalogika\PivotTable\Implementation\DefaultTableHeader;
 
 abstract class Block implements \Stringable
 {
-    private ?DefaultContext $elementContext = null;
+    private ?ElementContext $elementContext = null;
 
     protected function __construct(
         private readonly BlockContext $context,
@@ -45,9 +44,9 @@ abstract class Block implements \Stringable
         );
     }
 
-    protected function getElementContext(): DefaultContext
+    protected function getElementContext(): ElementContext
     {
-        return $this->elementContext ??= new DefaultContext(
+        return $this->elementContext ??= new ElementContext(
             depth: $this->getLevel(),
             subtotalDepth: $this->getContext()->getSubtotalDepth(),
             generatingBlock: $this,

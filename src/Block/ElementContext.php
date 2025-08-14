@@ -11,12 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Block;
 
-use Rekalogika\PivotTable\Block\Block;
-use Rekalogika\PivotTable\HtmlTable\ElementContext;
-
-final readonly class DefaultContext implements ElementContext
+final readonly class ElementContext
 {
     public static function createFlat(): self
     {
@@ -37,19 +34,16 @@ final readonly class DefaultContext implements ElementContext
         private int $subtotalDepth,
     ) {}
 
-    #[\Override]
     public function getDepth(): int
     {
         return $this->depth;
     }
 
-    #[\Override]
     public function getGeneratingBlock(): ?Block
     {
         return $this->generatingBlock;
     }
 
-    #[\Override]
     public function getSubtotalDepth(): int
     {
         return $this->subtotalDepth;

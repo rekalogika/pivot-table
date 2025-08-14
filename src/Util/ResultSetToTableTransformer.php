@@ -13,23 +13,23 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Util;
 
-use Rekalogika\PivotTable\Block\Result\DefaultContext;
-use Rekalogika\PivotTable\Block\Result\DefaultDataCell;
-use Rekalogika\PivotTable\Block\Result\DefaultHeaderCell;
-use Rekalogika\PivotTable\Block\Result\DefaultRow;
-use Rekalogika\PivotTable\Block\Result\DefaultRows;
-use Rekalogika\PivotTable\Block\Result\DefaultTable;
-use Rekalogika\PivotTable\Block\Result\DefaultTableBody;
-use Rekalogika\PivotTable\Block\Result\DefaultTableHeader;
+use Rekalogika\PivotTable\Block\ElementContext;
 use Rekalogika\PivotTable\Contracts\Result\ResultRow;
 use Rekalogika\PivotTable\Contracts\Result\ResultSet;
 use Rekalogika\PivotTable\HtmlTable\Table;
+use Rekalogika\PivotTable\Implementation\DefaultDataCell;
+use Rekalogika\PivotTable\Implementation\DefaultHeaderCell;
+use Rekalogika\PivotTable\Implementation\DefaultRow;
+use Rekalogika\PivotTable\Implementation\DefaultRows;
+use Rekalogika\PivotTable\Implementation\DefaultTable;
+use Rekalogika\PivotTable\Implementation\DefaultTableBody;
+use Rekalogika\PivotTable\Implementation\DefaultTableHeader;
 
 final class ResultSetToTableTransformer
 {
     private DefaultTableHeader $tableHeader;
     private DefaultTableBody $tableBody;
-    private DefaultContext $context;
+    private ElementContext $context;
 
     public static function transform(ResultSet $resultSet): Table
     {
@@ -38,7 +38,7 @@ final class ResultSetToTableTransformer
 
     private function __construct(ResultSet $resultSet)
     {
-        $this->context = DefaultContext::createFlat();
+        $this->context = ElementContext::createFlat();
 
         $tupleCount = $this->getMaxTupleCount($resultSet);
 

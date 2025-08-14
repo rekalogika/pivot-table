@@ -11,13 +11,14 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Block\Result;
+namespace Rekalogika\PivotTable\Implementation;
 
 use Rekalogika\PivotTable\HtmlTable\Row;
 use Rekalogika\PivotTable\HtmlTable\RowGroup;
 
 /**
  * @implements \IteratorAggregate<Row>
+ * @internal
  */
 final class DefaultRows implements \IteratorAggregate, RowGroup
 {
@@ -31,12 +32,12 @@ final class DefaultRows implements \IteratorAggregate, RowGroup
      */
     public function __construct(
         private readonly array $rows,
-        private readonly DefaultContext $context,
+        private readonly mixed $context,
     ) {}
 
     public static function createFromCell(
         DefaultCell $cell,
-        DefaultContext $context,
+        mixed $context,
     ): self {
         return new self([new DefaultRow([$cell], $context)], $context);
     }
