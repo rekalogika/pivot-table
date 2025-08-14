@@ -15,6 +15,7 @@ namespace Rekalogika\PivotTable\Util;
 
 use Rekalogika\PivotTable\Contracts\Cube\CubeCell;
 use Rekalogika\PivotTable\Contracts\Table\Table;
+use Rekalogika\PivotTable\Util\Implementation\CubeCellsTable;
 
 final class CubeCellsToTableTransformer
 {

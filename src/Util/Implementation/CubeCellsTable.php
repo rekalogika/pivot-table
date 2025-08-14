@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Util;
+namespace Rekalogika\PivotTable\Util\Implementation;
 
 use Rekalogika\PivotTable\Contracts\Cube\CubeCell;
 use Rekalogika\PivotTable\Contracts\Table\Table;
