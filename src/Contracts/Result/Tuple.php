@@ -15,5 +15,6 @@ namespace Rekalogika\PivotTable\Contracts\Result;
 
 /**
  * @extends \Traversable<Field>
+ * @deprecated
  */
 interface Tuple extends \Traversable, \Countable {}

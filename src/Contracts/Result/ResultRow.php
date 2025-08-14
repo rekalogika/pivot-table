@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Contracts\Result;
 
+/**
+ * @deprecated
+ */
 interface ResultRow
 {
     public function getTuple(): Tuple;
