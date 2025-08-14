@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Rekalogika\PivotTable\Block\Result;
 
 use Rekalogika\PivotTable\HtmlTable\Cell;
-use Rekalogika\PivotTable\HtmlTable\ElementContext;
 use Rekalogika\PivotTable\HtmlTable\Row;
 use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
@@ -33,14 +32,14 @@ final readonly class DefaultRow implements \IteratorAggregate, Row
      */
     public function __construct(
         array $cells,
-        private DefaultContext $context,
+        private mixed $context,
     ) {
         // $this->cells = $this->mergeCells($cells);
         $this->cells = $cells;
     }
 
     #[\Override]
-    public function getContext(): ElementContext
+    public function getContext(): mixed
     {
         return $this->context;
     }

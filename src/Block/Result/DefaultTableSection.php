@@ -23,11 +23,11 @@ abstract class DefaultTableSection implements \IteratorAggregate, \Countable, El
 {
     final public function __construct(
         private readonly DefaultRows $rows,
-        private readonly DefaultContext $context,
+        private readonly mixed $context,
     ) {}
 
     #[\Override]
-    final public function getContext(): DefaultContext
+    final public function getContext(): mixed
     {
         return $this->context;
     }

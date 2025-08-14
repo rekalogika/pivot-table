@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Util;
 
-use Rekalogika\PivotTable\Block\Result\DefaultContext;
+use Rekalogika\PivotTable\Block\DefaultContext;
 use Rekalogika\PivotTable\Block\Result\DefaultDataCell;
 use Rekalogika\PivotTable\Block\Result\DefaultHeaderCell;
 use Rekalogika\PivotTable\Block\Result\DefaultRow;

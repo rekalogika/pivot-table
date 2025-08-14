@@ -20,7 +20,6 @@ use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\LeafBlock\NormalLeafBlock;
 use Rekalogika\PivotTable\Block\LeafBlock\PivotLeafBlock;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
-use Rekalogika\PivotTable\Block\Result\DefaultContext;
 use Rekalogika\PivotTable\Block\Result\DefaultRows;
 use Rekalogika\PivotTable\Block\Result\DefaultTable;
 use Rekalogika\PivotTable\Block\Result\DefaultTableBody;

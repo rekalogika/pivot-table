@@ -31,12 +31,12 @@ final class DefaultRows implements \IteratorAggregate, RowGroup
      */
     public function __construct(
         private readonly array $rows,
-        private readonly DefaultContext $context,
+        private readonly mixed $context,
     ) {}
 
     public static function createFromCell(
         DefaultCell $cell,
-        DefaultContext $context,
+        mixed $context,
     ): self {
         return new self([new DefaultRow([$cell], $context)], $context);
     }
