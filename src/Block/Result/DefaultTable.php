@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\ElementContext;
-use Rekalogika\PivotTable\Table\Table;
-use Rekalogika\PivotTable\Table\TableVisitor;
+use Rekalogika\PivotTable\HtmlTable\ElementContext;
+use Rekalogika\PivotTable\HtmlTable\Table;
+use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 /**
  * @implements \IteratorAggregate<DefaultTableSection>

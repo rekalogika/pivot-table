@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\FooterCell;
-use Rekalogika\PivotTable\Table\TableVisitor;
+use Rekalogika\PivotTable\HtmlTable\FooterCell;
+use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 final readonly class DefaultFooterCell extends DefaultCell implements FooterCell
 {

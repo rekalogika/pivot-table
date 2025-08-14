@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\PivotTable\Block\Result;
 
 use Rekalogika\PivotTable\Block\Block;
-use Rekalogika\PivotTable\Table\Cell;
+use Rekalogika\PivotTable\HtmlTable\Cell;
 
 abstract readonly class DefaultCell implements Cell
 {

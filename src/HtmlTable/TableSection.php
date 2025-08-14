@@ -11,11 +11,10 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML table row (<tr>)
- *
- * @extends \Traversable<Cell>
+ * Represents a HTML tag containing rows, including table header, table body, or
+ * table footer (<thead>, <tbody>, or <tfoot>)
  */
-interface Row extends \Traversable, \Countable, Element {}
+interface TableSection extends RowGroup, Element {}

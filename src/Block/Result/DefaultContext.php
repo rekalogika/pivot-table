@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\PivotTable\Block\Result;
 
 use Rekalogika\PivotTable\Block\Block;
-use Rekalogika\PivotTable\Table\ElementContext;
+use Rekalogika\PivotTable\HtmlTable\ElementContext;
 
 final readonly class DefaultContext implements ElementContext
 {

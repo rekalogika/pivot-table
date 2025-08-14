@@ -11,9 +11,11 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML header cell (<th>)
+ * Represents a collection of HTML rows (<tr>) grouped together.
+ *
+ * @extends \Traversable<Row>
  */
-interface HeaderCell extends Cell {}
+interface RowGroup extends \Traversable, \Countable {}

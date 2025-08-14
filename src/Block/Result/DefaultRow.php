@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\Cell;
-use Rekalogika\PivotTable\Table\ElementContext;
-use Rekalogika\PivotTable\Table\Row;
-use Rekalogika\PivotTable\Table\TableVisitor;
+use Rekalogika\PivotTable\HtmlTable\Cell;
+use Rekalogika\PivotTable\HtmlTable\ElementContext;
+use Rekalogika\PivotTable\HtmlTable\Row;
+use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 /**
  * @implements \IteratorAggregate<Cell>

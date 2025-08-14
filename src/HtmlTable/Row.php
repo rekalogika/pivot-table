@@ -11,9 +11,11 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML table body (<tbody>)
+ * Represents a HTML table row (<tr>)
+ *
+ * @extends \Traversable<Cell>
  */
-interface TableBody extends TableSection {}
+interface Row extends \Traversable, \Countable, Element {}

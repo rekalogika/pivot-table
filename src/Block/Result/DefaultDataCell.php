@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\DataCell;
-use Rekalogika\PivotTable\Table\TableVisitor;
+use Rekalogika\PivotTable\HtmlTable\DataCell;
+use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 final readonly class DefaultDataCell extends DefaultCell implements DataCell
 {

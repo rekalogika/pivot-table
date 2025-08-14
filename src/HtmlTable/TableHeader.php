@@ -11,16 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML tabel cell (<td> or <th>).
+ * Represents a HTML table header (<thead>)
  */
-interface Cell extends Element
-{
-    public function getColumnSpan(): int;
-
-    public function getRowSpan(): int;
-
-    public function getContent(): mixed;
-}
+interface TableHeader extends TableSection {}

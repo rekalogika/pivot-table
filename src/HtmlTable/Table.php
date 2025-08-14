@@ -11,9 +11,14 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML table footer (<tfoot>)
+ * Represents a HTML table (<table>).
+ *
+ * @extends \Traversable<TableSection>
  */
-interface TableFooter extends TableSection {}
+interface Table extends \Traversable, \Countable, Element
+{
+    public function getRows(): RowGroup;
+}

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\TableHeader;
-use Rekalogika\PivotTable\Table\TableVisitor;
+use Rekalogika\PivotTable\HtmlTable\TableHeader;
+use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 final class DefaultTableHeader extends DefaultTableSection implements TableHeader
 {

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\Element;
-use Rekalogika\PivotTable\Table\Row;
+use Rekalogika\PivotTable\HtmlTable\Element;
+use Rekalogika\PivotTable\HtmlTable\Row;
 
 /**
  * @implements \IteratorAggregate<Row>

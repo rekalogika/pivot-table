@@ -11,10 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML tag containing rows, including table header, table body, or
- * table footer (<thead>, <tbody>, or <tfoot>)
+ * Represents a HTML table footer (<tfoot>)
  */
-interface TableSection extends RowGroup, Element {}
+interface TableFooter extends TableSection {}

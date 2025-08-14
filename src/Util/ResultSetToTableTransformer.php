@@ -23,7 +23,7 @@ use Rekalogika\PivotTable\Block\Result\DefaultTableBody;
 use Rekalogika\PivotTable\Block\Result\DefaultTableHeader;
 use Rekalogika\PivotTable\Contracts\Result\ResultRow;
 use Rekalogika\PivotTable\Contracts\Result\ResultSet;
-use Rekalogika\PivotTable\Table\Table;
+use Rekalogika\PivotTable\HtmlTable\Table;
 
 final class ResultSetToTableTransformer
 {

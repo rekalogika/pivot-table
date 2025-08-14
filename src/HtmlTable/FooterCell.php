@@ -11,9 +11,11 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML data cell (<td>)
+ * Represents a HTML footer cell. This is conceptual only as HTML does not have
+ * a specific footer cell element. It should be rendered as a regular cell
+ * (<td> or <th>).
  */
-interface DataCell extends Cell {}
+interface FooterCell extends Cell {}

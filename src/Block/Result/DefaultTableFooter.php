@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Block\Result;
 
-use Rekalogika\PivotTable\Table\TableFooter;
-use Rekalogika\PivotTable\Table\TableVisitor;
+use Rekalogika\PivotTable\HtmlTable\TableFooter;
+use Rekalogika\PivotTable\HtmlTable\TableVisitor;
 
 final class DefaultTableFooter extends DefaultTableSection implements TableFooter
 {

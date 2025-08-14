@@ -11,14 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\PivotTable\Table;
+namespace Rekalogika\PivotTable\HtmlTable;
 
 /**
- * Represents a HTML table (<table>).
- *
- * @extends \Traversable<TableSection>
+ * Represents a HTML header cell (<th>)
  */
-interface Table extends \Traversable, \Countable, Element
-{
-    public function getRows(): RowGroup;
-}
+interface HeaderCell extends Cell {}
