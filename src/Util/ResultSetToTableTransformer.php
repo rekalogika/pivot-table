@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\Util;
 
+use Rekalogika\PivotTable\Block\Result\DefaultContext;
+use Rekalogika\PivotTable\Block\Result\DefaultDataCell;
+use Rekalogika\PivotTable\Block\Result\DefaultHeaderCell;
+use Rekalogika\PivotTable\Block\Result\DefaultRow;
+use Rekalogika\PivotTable\Block\Result\DefaultRows;
+use Rekalogika\PivotTable\Block\Result\DefaultTable;
+use Rekalogika\PivotTable\Block\Result\DefaultTableBody;
+use Rekalogika\PivotTable\Block\Result\DefaultTableHeader;
 use Rekalogika\PivotTable\Contracts\Result\ResultRow;
 use Rekalogika\PivotTable\Contracts\Result\ResultSet;
-use Rekalogika\PivotTable\Implementation\Table\DefaultContext;
-use Rekalogika\PivotTable\Implementation\Table\DefaultDataCell;
-use Rekalogika\PivotTable\Implementation\Table\DefaultHeaderCell;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRow;
-use Rekalogika\PivotTable\Implementation\Table\DefaultRows;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTable;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTableBody;
-use Rekalogika\PivotTable\Implementation\Table\DefaultTableHeader;
-use Rekalogika\PivotTable\Table\Table;
+use Rekalogika\PivotTable\HtmlTable\Table;
 
 final class ResultSetToTableTransformer
 {

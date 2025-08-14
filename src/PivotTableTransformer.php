@@ -16,7 +16,7 @@ namespace Rekalogika\PivotTable;
 use Rekalogika\PivotTable\Block\Block;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
 use Rekalogika\PivotTable\Contracts\Cube\Cube;
-use Rekalogika\PivotTable\Table\Table;
+use Rekalogika\PivotTable\HtmlTable\Table;
 
 final readonly class PivotTableTransformer
 {

@@ -31,9 +31,9 @@ final class ArrayTableFactory
     ) {}
 
     /**
-     * @param list<array<string,mixed>> $input
+     * @param iterable<array<string,mixed>> $input
      */
-    public function create(array $input): ArrayTable
+    public function create(iterable $input): ArrayTable
     {
         return new ArrayTable(
             rows: $this->createRows($input),
@@ -70,10 +70,10 @@ final class ArrayTableFactory
     }
 
     /**
-     * @param list<array<string,mixed>> $input
+     * @param iterable<array<string,mixed>> $input
      * @return iterable<ArrayRow>
      */
-    public function createRows(array $input): iterable
+    public function createRows(iterable $input): iterable
     {
         /** @psalm-suppress MixedAssignment */
         foreach ($input as $row) {
