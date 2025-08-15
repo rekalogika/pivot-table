@@ -49,9 +49,9 @@ END $$;
 Export to JSON:
 
 ```sql
-\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by cube(name, country, month)) items) to 'cube.json';
+\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by distinct cube(name, country, month)) items) to 'cube.json';
 
-\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by rollup(name, country, month)) items) to 'rollup.json';
+\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by distinct rollup(name, country, month)) items) to 'rollup.json';
 
 \copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price) from items group by name, country, month) items) to 'nogrouping.json';
 ```

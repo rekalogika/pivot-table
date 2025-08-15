@@ -23,6 +23,11 @@ final readonly class TableToCubeAdapter implements Cube
 {
     private TableToCubeAdapterManager $manager;
 
+    public static function adapt(Table $table): self
+    {
+        return new self(table: $table);
+    }
+
     public function __construct(
         private Table $table,
         private IdentityStrategy $identityStrategy = new DefaultIdentityStrategy(),
