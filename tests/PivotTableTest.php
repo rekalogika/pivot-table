@@ -110,7 +110,7 @@ final class PivotTableTest extends TestCase
             'unpivoted' => ['name'],
             'pivoted' => ['@values'],
             'measureFields' => ['count', 'sum'],
-            'expectedFile' => 'basic.html',
+            'expectedFile' => 'basic.md',
         ];
     }
 }
