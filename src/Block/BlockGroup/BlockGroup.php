@@ -137,7 +137,7 @@ abstract class BlockGroup extends Block
         $blocks = [];
 
         foreach ($children as $childCube) {
-            $blocks[] = $this->createBlock($childCube);
+            $blocks[] = $this->createBlock($childCube, $children);
         }
 
         /** @var non-empty-list<Block> $blocks */

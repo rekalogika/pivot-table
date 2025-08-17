@@ -25,6 +25,7 @@ final class PivotTableTest extends TestCase
      * @param list<string> $unpivoted
      * @param list<string> $pivoted
      * @param list<string> $measures
+     * @param list<string> $subtotals
      * @param string $expectedFile
      * @dataProvider dataProvider
      */
@@ -34,6 +35,7 @@ final class PivotTableTest extends TestCase
         array $pivoted,
         array $measures,
         string $expectedFile,
+        ?array $subtotals = null,
     ): void {
         $inputFilePath = __DIR__ . '/resultset/' . $inputFile;
         $this->assertFileExists($inputFilePath);
@@ -72,8 +74,9 @@ final class PivotTableTest extends TestCase
             cube: $cube,
             unpivoted: $unpivoted,
             pivoted: $pivoted,
+            measures: $measures,
             skipLegends: ['@values'],
-            withSubtotal: [],
+            withSubtotal: $subtotals ?? [],
         );
 
         // convert html table object to html string
@@ -115,7 +118,7 @@ final class PivotTableTest extends TestCase
     /**
      * Data provider for testPivotTable.
      *
-     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measures:list<string>,expectedFile:string}>
+     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measures:list<string>,expectedFile:string,subtotals?:list<string>}>
      */
     public static function dataProvider(): iterable
     {
@@ -127,6 +130,89 @@ final class PivotTableTest extends TestCase
             'pivoted' => ['@values'],
             'measures' => ['count', 'sum'],
             'expectedFile' => 'empty.md',
+        ];
+
+        yield '1m, pivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => [],
+            'pivoted' => ['@values'],
+            'measures' => ['count'],
+            'expectedFile' => '1m-pivoted-values.md',
+        ];
+
+        yield '1m, unpivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['@values'],
+            'pivoted' => [],
+            'measures' => ['count'],
+            'expectedFile' => '1m-unpivoted-values.md',
+        ];
+
+        yield '2m, pivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => [],
+            'pivoted' => ['@values'],
+            'measures' => ['count', 'sum'],
+            'expectedFile' => '2m-pivoted-values.md',
+        ];
+
+        yield '2m, unpivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['@values'],
+            'pivoted' => [],
+            'measures' => ['count', 'sum'],
+            'expectedFile' => '2m-unpivoted-values.md',
+        ];
+
+        // maybe revisit?
+        yield '1u, unpivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name', '@values'],
+            'pivoted' => [],
+            'measures' => [],
+            'expectedFile' => '1u-unpivoted-values.md',
+        ];
+
+        yield '1p, unpivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['@values'],
+            'pivoted' => ['name'],
+            'measures' => [],
+            'expectedFile' => '1p-unpivoted-values.md',
+        ];
+
+        yield '1u1m, pivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name'],
+            'pivoted' => ['@values'],
+            'measures' => ['count'],
+            'expectedFile' => '1u1m-pivoted-values.md',
+        ];
+
+        yield '1u1m, unpivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name', '@values'],
+            'pivoted' => [],
+            'measures' => ['count'],
+            'expectedFile' => '1u1m-unpivoted-values.md',
+        ];
+
+        yield '1u1m, pivoted values, subtotal' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name'],
+            'pivoted' => ['@values'],
+            'measures' => ['count'],
+            'subtotals' => ['name'],
+            'expectedFile' => '1u1m-pivoted-values-subtotals.md',
+        ];
+
+        yield '1u1m, unpivoted values, subtotal' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name', '@values'],
+            'pivoted' => [],
+            'measures' => ['count'],
+            'subtotals' => ['name'],
+            'expectedFile' => '1u1m-unpivoted-values-subtotals.md',
         ];
 
         yield '1u2m, pivoted values' => [
@@ -143,6 +229,24 @@ final class PivotTableTest extends TestCase
             'pivoted' => [],
             'measures' => ['count', 'sum'],
             'expectedFile' => '1u2m-unpivoted-values.md',
+        ];
+
+        yield '1u2m, pivoted values, subtotal' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name'],
+            'pivoted' => ['@values'],
+            'measures' => ['count', 'sum'],
+            'subtotals' => ['name'],
+            'expectedFile' => '1u2m-pivoted-values-subtotals.md',
+        ];
+
+        yield '1u2m, unpivoted values, subtotal' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name', '@values'],
+            'pivoted' => [],
+            'measures' => ['count', 'sum'],
+            'subtotals' => ['name'],
+            'expectedFile' => '1u2m-unpivoted-values-subtotals.md',
         ];
     }
 }

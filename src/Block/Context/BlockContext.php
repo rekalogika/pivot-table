@@ -22,6 +22,7 @@ final readonly class BlockContext
     /**
      * @param list<string> $pivotedKeys
      * @param list<string> $unpivotedKeys
+     * @param list<string> $measures
      * @param list<string> $currentKeyPath
      * @param list<string> $skipLegends
      * @param list<string> $createSubtotals
@@ -32,6 +33,7 @@ final readonly class BlockContext
         private CubeCellDecorator $apexCubeCell,
         array $unpivotedKeys,
         array $pivotedKeys,
+        private array $measures,
         private array $skipLegends,
         private array $createSubtotals,
         private int $subtotalDepth = 0,
@@ -55,6 +57,7 @@ final readonly class BlockContext
             apexCubeCell: $this->apexCubeCell,
             pivotedKeys: $this->keys->getPivotedKeys(),
             unpivotedKeys: $this->keys->getUnpivotedKeys(),
+            measures: $this->measures,
             currentKeyPath: $this->keys->getCurrentKeyPath(),
             skipLegends: $this->skipLegends,
             createSubtotals: $this->createSubtotals,
@@ -72,6 +75,7 @@ final readonly class BlockContext
             apexCubeCell: $this->apexCubeCell,
             pivotedKeys: $this->keys->getPivotedKeys(),
             unpivotedKeys: $this->keys->getUnpivotedKeys(),
+            measures: $this->measures,
             currentKeyPath: $this->keys->getCurrentKeyPath(),
             skipLegends: $this->skipLegends,
             createSubtotals: $this->createSubtotals,
@@ -91,6 +95,7 @@ final readonly class BlockContext
             apexCubeCell: $this->apexCubeCell,
             pivotedKeys: $this->keys->getPivotedKeys(),
             unpivotedKeys: $this->keys->getUnpivotedKeys(),
+            measures: $this->measures,
             currentKeyPath: $newPath,
             skipLegends: $this->skipLegends,
             createSubtotals: $this->createSubtotals,

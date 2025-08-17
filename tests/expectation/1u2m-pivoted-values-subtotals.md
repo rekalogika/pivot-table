@@ -1,0 +1,31 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Count</th>
+      <th>Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>itemB</td>
+      <td>31</td>
+      <td>13868.41</td>
+    </tr>
+    <tr>
+      <td>itemA</td>
+      <td>21</td>
+      <td>12663.42</td>
+    </tr>
+    <tr>
+      <td>itemC</td>
+      <td>46</td>
+      <td>25198.08</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td>98</td>
+      <td>51729.91</td>
+    </tr>
+  </tbody>
+</table>

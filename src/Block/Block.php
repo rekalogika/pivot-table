@@ -19,6 +19,7 @@ use Rekalogika\PivotTable\Block\BranchBlock\RootBlock;
 use Rekalogika\PivotTable\Block\Context\BlockContext;
 use Rekalogika\PivotTable\Block\LeafBlock\NormalLeafBlock;
 use Rekalogika\PivotTable\Block\LeafBlock\PivotLeafBlock;
+use Rekalogika\PivotTable\Block\LeafBlock\SingleNodeLeafBlock;
 use Rekalogika\PivotTable\Block\Model\CubeCellDecorator;
 use Rekalogika\PivotTable\Implementation\DefaultRows;
 use Rekalogika\PivotTable\Implementation\DefaultTable;
@@ -61,8 +62,14 @@ abstract class Block implements \Stringable
         return $this->context->getBlockDepth();
     }
 
-    final protected function createBlock(CubeCellDecorator $cube): Block
-    {
+    /**
+     * @param list<CubeCellDecorator> $cubeWithSiblings
+     * @return Block
+     */
+    final protected function createBlock(
+        CubeCellDecorator $cube,
+        array $cubeWithSiblings,
+    ): Block {
         $context = $this->getContext();
         $context = $context->pushKey();
 
@@ -91,17 +98,12 @@ abstract class Block implements \Stringable
                     parent: $this,
                     context: $context,
                 );
-                // @todo restore functionality
-                // } elseif (
-                //     $parentNode !== null
-                //     && $level > 0
-                //     && \count($parentNode->getBalancedChildren(1, $level - 1)) === 1
-                // ) {
-                //     return new SingleNodeLeafBlock(
-                //         cube: $cube,
-                //         parent: $this,
-                //         context: $context,
-                //     );
+            } elseif (\count($cubeWithSiblings) === 1) {
+                return new SingleNodeLeafBlock(
+                    cube: $cube,
+                    parent: $this,
+                    context: $context,
+                );
             } else {
                 return new NormalLeafBlock(
                     cube: $cube,
@@ -115,6 +117,7 @@ abstract class Block implements \Stringable
     /**
      * @param list<string> $unpivoted
      * @param list<string> $pivoted
+     * @param list<string> $measures
      * @param list<string> $skipLegends
      * @param list<string> $withSubtotal
      */
@@ -122,6 +125,7 @@ abstract class Block implements \Stringable
         CubeCellDecorator $cubeCell,
         array $unpivoted = [],
         array $pivoted = [],
+        array $measures = [],
         array $skipLegends = ['@values'],
         array $withSubtotal = [],
     ): Block {
@@ -129,6 +133,7 @@ abstract class Block implements \Stringable
             apexCubeCell: $cubeCell,
             unpivotedKeys: $unpivoted,
             pivotedKeys: $pivoted,
+            measures: $measures,
             skipLegends: $skipLegends,
             createSubtotals: $withSubtotal,
         );
