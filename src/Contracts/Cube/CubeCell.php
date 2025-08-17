@@ -47,7 +47,7 @@ interface CubeCell
     /**
      * Drill down the cube by a specific dimension. Drilling down adds a new
      * dimension to the tuple of the resulting cells.
-     * 
+     *
      * @return iterable<CubeCell>
      */
     public function drillDown(string $dimensionName): iterable;
