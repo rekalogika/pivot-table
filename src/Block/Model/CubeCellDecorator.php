@@ -20,17 +20,25 @@ use Rekalogika\PivotTable\Contracts\Cube\MeasureMember;
 
 final readonly class CubeCellDecorator implements CubeCell
 {
-    public static function new(Cube $cube): self
+    /**
+     * @param list<string> $measures
+     */
+    public static function new(Cube $cube, array $measures): self
     {
         return new self(
             cubeCell: $cube->getApexCell(),
             cube: $cube,
+            measures: $measures,
         );
     }
 
+    /**
+     * @param list<string> $measures
+     */
     private function __construct(
         private CubeCell $cubeCell,
         private Cube $cube,
+        private array $measures,
         private ?string $subtotalKey = null,
     ) {}
 
@@ -39,6 +47,7 @@ final readonly class CubeCellDecorator implements CubeCell
         return new self(
             cubeCell: $this->cubeCell,
             cube: $this->cube,
+            measures: $this->measures,
             subtotalKey: $key,
         );
     }
@@ -119,20 +128,75 @@ final readonly class CubeCellDecorator implements CubeCell
         return new self(
             cubeCell: $result,
             cube: $this->cube,
+            measures: $this->measures,
         );
     }
 
+    /**
+     * @return iterable<self>
+     */
     #[\Override]
     public function drillDown(string $dimensionName): iterable
     {
+        if ($dimensionName === '@values') {
+            foreach ($this->drillDownMeasures() as $cube) {
+                yield $cube;
+            }
+
+            return;
+        }
+
         $cubes = $this->cubeCell->drillDown($dimensionName);
 
         foreach ($cubes as $cube) {
             yield new self(
                 cubeCell: $cube,
                 cube: $this->cube,
+                measures: $this->measures,
             );
         }
+    }
+
+    /**
+     * @return iterable<self>
+     */
+    private function drillDownMeasures(): iterable
+    {
+        $cubes = $this->cubeCell->drillDown('@values');
+
+        $newCubes = [];
+
+        foreach ($cubes as $cube) {
+            $measureMember = self::getMeasureMember($cube);
+
+            $newCubes[$measureMember->getMeasureName()] = new self(
+                cubeCell: $cube,
+                cube: $this->cube,
+                measures: $this->measures,
+            );
+        }
+
+        foreach ($this->measures as $measureName) {
+            yield $newCubes[$measureName] ?? throw new \InvalidArgumentException(
+                "Measure '$measureName' not found in the cube.",
+            );
+        }
+    }
+
+    private static function getMeasureMember(CubeCell $cube): MeasureMember
+    {
+        $tuple = $cube->getTuple();
+
+        $dimension = $tuple['@values']
+            ?? throw new \InvalidArgumentException("Dimension '@values' not found in cube.");
+
+        $member = $dimension->getMember();
+
+        if (!$member instanceof MeasureMember) {
+            throw new \InvalidArgumentException("Dimension '@values' is not a MeasureMember.");
+        }
+
+        return $member;
     }
 
     #[\Override]
@@ -143,6 +207,7 @@ final readonly class CubeCellDecorator implements CubeCell
         return new self(
             cubeCell: $result,
             cube: $this->cube,
+            measures: $this->measures,
         );
     }
 
@@ -162,6 +227,7 @@ final readonly class CubeCellDecorator implements CubeCell
         return new self(
             cubeCell: $result,
             cube: $this->cube,
+            measures: $this->measures,
         );
     }
 
@@ -170,17 +236,14 @@ final readonly class CubeCellDecorator implements CubeCell
      */
     public function drillDownWithoutBalancing(string $dimensionName): iterable
     {
-        $cubes = $this->cubeCell->drillDown($dimensionName);
 
-        foreach ($cubes as $cube) {
+
+        foreach ($this->drillDown($dimensionName) as $cube) {
             if ($cube->isNull()) {
                 continue;
             }
 
-            yield new self(
-                cubeCell: $cube,
-                cube: $this->cube,
-            );
+            yield $cube;
         }
     }
 
