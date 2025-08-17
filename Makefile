@@ -40,3 +40,4 @@ tools/php-cs-fixer:
 .PHONY: clean
 clean:
 	$(PHP) vendor/bin/psalm --clear-cache
+	rm tests/output/*.md || true

@@ -23,26 +23,28 @@ final readonly class PivotTableTransformer
     private function __construct() {}
 
     /**
-     * @param list<string> $unpivotedNodes
-     * @param list<string> $pivotedNodes
+     * @todo rename nodes to dimensions
+     *
+     * @param list<string> $unpivoted
+     * @param list<string> $pivoted
      * @param list<string> $skipLegends
-     * @param list<string> $createSubtotals
+     * @param list<string> $withSubtotal
      */
     public static function transform(
         Cube $cube,
-        array $unpivotedNodes = [],
-        array $pivotedNodes = [],
+        array $unpivoted = [],
+        array $pivoted = [],
         array $skipLegends = ['@values'],
-        array $createSubtotals = [],
+        array $withSubtotal = [],
     ): Table {
         $cubeCell = CubeCellDecorator::new($cube);
 
         $block = Block::new(
             cubeCell: $cubeCell,
-            unpivotedNodes: $unpivotedNodes,
-            pivotedNodes: $pivotedNodes,
+            unpivoted: $unpivoted,
+            pivoted: $pivoted,
             skipLegends: $skipLegends,
-            createSubtotals: $createSubtotals,
+            withSubtotal: $withSubtotal,
         );
 
         return $block->generateTable();

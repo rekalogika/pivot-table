@@ -47,6 +47,6 @@ final readonly class TableToCubeAdapter implements Cube
     #[\Override]
     public function getSubtotalDescription(string $dimensionName): mixed
     {
-        return $this->table->getSubtotalLegend($dimensionName);
+        return $this->table->getSubtotalLabel($dimensionName);
     }
 }

@@ -29,6 +29,11 @@ use Rekalogika\PivotTable\HtmlTable\TableVisitor;
  */
 class BasicTableRenderer implements TableVisitor
 {
+    public static function render(Table $table): string
+    {
+        return (new self())->getHtml($table);
+    }
+
     public function getHtml(Table $table): string
     {
         return $table->accept($this);
@@ -37,6 +42,10 @@ class BasicTableRenderer implements TableVisitor
     #[\Override]
     public function visitTable(Table $table): string
     {
+        if (\count($table) === 0) {
+            return '';
+        }
+
         $result = \sprintf('<table %s>', $this->getTableAttributes());
 
         foreach ($table as $rowGroup) {
@@ -49,6 +58,10 @@ class BasicTableRenderer implements TableVisitor
     #[\Override]
     public function visitTableHeader(TableHeader $tableHeader): string
     {
+        if (\count($tableHeader) === 0) {
+            return '';
+        }
+
         $result = \sprintf('<thead %s>', $this->getTableHeaderAttributes());
 
         foreach ($tableHeader as $row) {
@@ -61,6 +74,10 @@ class BasicTableRenderer implements TableVisitor
     #[\Override]
     public function visitTableBody(TableBody $tableBody): string
     {
+        if (\count($tableBody) === 0) {
+            return '';
+        }
+
         $result = \sprintf('<tbody %s>', $this->getTableBodyAttributes());
 
         foreach ($tableBody as $row) {
@@ -73,6 +90,10 @@ class BasicTableRenderer implements TableVisitor
     #[\Override]
     public function visitTableFooter(TableFooter $tableFooter): string
     {
+        if (\count($tableFooter) === 0) {
+            return '';
+        }
+
         $result = \sprintf('<tfoot %s>', $this->getTableFooterAttributes());
 
         foreach ($tableFooter as $row) {

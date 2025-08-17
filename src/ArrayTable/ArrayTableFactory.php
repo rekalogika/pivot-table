@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Rekalogika\PivotTable\ArrayTable;
 
+use Rekalogika\PivotTable\Contracts\Cube\Cube;
+use Rekalogika\PivotTable\TableToCubeAdapter\TableToCubeAdapter;
+
 final class ArrayTableFactory
 {
     /**
@@ -22,6 +25,7 @@ final class ArrayTableFactory
      * @param array<string,mixed> $legends Key is any dimension and measure
      * field, value is the legend value. Key can also be `@values` to indicate
      * the legend of the measure dimension.
+     * @param array<string,mixed>|string $subtotalLabels
      */
     public static function createTable(
         iterable $input,
@@ -29,6 +33,7 @@ final class ArrayTableFactory
         array $measureFields,
         string $groupingField,
         array $legends,
+        array|string $subtotalLabels = 'Total',
     ): ArrayTable {
         $self = new self(
             input: $input,
@@ -36,9 +41,10 @@ final class ArrayTableFactory
             measureFields: $measureFields,
             groupingField: $groupingField,
             legends: $legends,
+            subtotalLabels: 'Total',
         );
 
-        return $self->getOutput();
+        return $self->getTable();
     }
 
     /**
@@ -48,6 +54,36 @@ final class ArrayTableFactory
      * @param array<string,mixed> $legends Key is any dimension and measure
      * field, value is the legend value. Key can also be `@values` to indicate
      * the legend of the measure dimension.
+     * @param array<string,mixed>|string $subtotalLabels
+     */
+    public static function createCube(
+        iterable $input,
+        array $dimensionFields,
+        array $measureFields,
+        string $groupingField,
+        array $legends,
+        array|string $subtotalLabels = 'Total',
+    ): Cube {
+        $table = self::createTable(
+            input: $input,
+            dimensionFields: $dimensionFields,
+            measureFields: $measureFields,
+            groupingField: $groupingField,
+            legends: $legends,
+            subtotalLabels: $subtotalLabels,
+        );
+
+        return TableToCubeAdapter::adapt($table);
+    }
+
+    /**
+     * @param iterable<array<string,mixed>> $input
+     * @param list<string> $dimensionFields
+     * @param list<string> $measureFields
+     * @param array<string,mixed> $legends Key is any dimension and measure
+     * field, value is the legend value. Key can also be `@values` to indicate
+     * the legend of the measure dimension.
+     * @param array<string,mixed>|string $subtotalLabels
      */
     private function __construct(
         private readonly iterable $input,
@@ -55,13 +91,15 @@ final class ArrayTableFactory
         private readonly array $measureFields,
         private readonly string $groupingField,
         private readonly array $legends,
+        private readonly array|string $subtotalLabels,
     ) {}
 
-    private function getOutput(): ArrayTable
+    private function getTable(): ArrayTable
     {
         return new ArrayTable(
             rows: $this->createRows($this->input),
             legends: $this->legends,
+            subtotalLabels: $this->subtotalLabels,
         );
     }
 
