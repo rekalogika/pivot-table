@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th>Count</th>
+      <th>Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>98</td>
+      <td>51729.91</td>
+    </tr>
+  </tbody>
+</table>
