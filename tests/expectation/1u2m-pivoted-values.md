@@ -23,5 +23,4 @@
       <td>25198.08</td>
     </tr>
   </tbody>
-  <tfoot/>
 </table>

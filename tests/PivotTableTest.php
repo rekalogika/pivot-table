@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Rekalogika\PivotTable\ArrayTable\ArrayTableFactory;
 use Rekalogika\PivotTable\PivotTableTransformer;
 use Rekalogika\PivotTable\TableRenderer\BasicTableRenderer;
-use Rekalogika\PivotTable\TableToCubeAdapter\TableToCubeAdapter;
 
 final class PivotTableTest extends TestCase
 {
@@ -25,7 +24,7 @@ final class PivotTableTest extends TestCase
      * @param string $inputFile
      * @param list<string> $unpivoted
      * @param list<string> $pivoted
-     * @param list<string> $measureFields
+     * @param list<string> $measures
      * @param string $expectedFile
      * @dataProvider dataProvider
      */
@@ -33,7 +32,7 @@ final class PivotTableTest extends TestCase
         string $inputFile,
         array $unpivoted,
         array $pivoted,
-        array $measureFields,
+        array $measures,
         string $expectedFile,
     ): void {
         $inputFilePath = __DIR__ . '/resultset/' . $inputFile;
@@ -47,50 +46,65 @@ final class PivotTableTest extends TestCase
 
         /** @var list<array<string,mixed>> $data */
 
-        $legends = [
-            '@values' => 'Values',
-            'name' => 'Name',
-            'country' => 'Country',
-            'month' => 'Month',
-            'count' => 'Count',
-            'sum' => 'Sum',
-        ];
-
-        $table = ArrayTableFactory::createTable(
+        // convert result set to cube
+        $cube = ArrayTableFactory::createCube(
             input: $data,
             dimensionFields: ['name', 'country', 'month'],
             measureFields: ['count', 'sum'],
             groupingField: 'grouping',
-            legends: $legends,
+            legends: [
+                '@values' => 'Values',
+                'name' => 'Name',
+                'country' => 'Country',
+                'month' => 'Month',
+                'count' => 'Count',
+                'sum' => 'Sum',
+            ],
+            subtotalLabels: [
+                'name' => 'All names',
+                'country' => 'All countries',
+                'month' => 'All months',
+            ],
         );
 
-        $cube = TableToCubeAdapter::adapt($table);
-
+        // convert cube to html table object
         $htmlTable = PivotTableTransformer::transform(
             cube: $cube,
-            unpivotedNodes: $unpivoted,
-            pivotedNodes: $pivoted,
+            unpivoted: $unpivoted,
+            pivoted: $pivoted,
             skipLegends: ['@values'],
-            createSubtotals: [],
+            withSubtotal: [],
         );
 
-        $string = (new BasicTableRenderer())->getHtml($htmlTable);
+        // convert html table object to html string
+        $string = BasicTableRenderer::render($htmlTable);
 
+        // pretty print the HTML
         $dom = new \DOMDocument();
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = true;
 
-        /** @psalm-suppress ArgumentTypeCoercion */
-        $dom->loadXML($string, LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED);
+        if ($string !== '') {
+            $dom->loadXML($string, LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED);
 
-        $string = $dom->saveXML();
+            $string = $dom->saveXML(options: LIBXML_NOEMPTYTAG | LIBXML_NOXMLDECL);
+            $this->assertIsString($string);
+            $string = trim($string);
+        }
+
+        // remove XML preamble
+        $string = preg_replace('/^<\?xml.*?\?>\s*/', '', $string);
         $this->assertIsString($string);
-        $string = str_replace('<?xml version="1.0"?>', '', $string);
-        $string = trim($string);
 
+        // save to output directory
+        $outputFilePath = __DIR__ . '/output/' . $expectedFile;
+        file_put_contents($outputFilePath, $string);
+
+        // check if the expected file exists
         $expectedFilePath = __DIR__ . '/expectation/' . $expectedFile;
         $this->assertFileExists($expectedFilePath);
 
+        // load the expected content
         $expectedContent = file_get_contents($expectedFilePath);
         $this->assertNotFalse($expectedContent);
 
@@ -101,16 +115,34 @@ final class PivotTableTest extends TestCase
     /**
      * Data provider for testPivotTable.
      *
-     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measureFields:list<string>,expectedFile:string}>
+     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measures:list<string>,expectedFile:string}>
      */
     public static function dataProvider(): iterable
     {
-        yield 'Basic' => [
+        // 1u 2p 3m = 1 unpivoted dimensions, 2 pivoted dimensions, 3 measures
+
+        yield 'empty' => [
+            'inputFile' => 'empty.json',
+            'unpivoted' => ['name'],
+            'pivoted' => ['@values'],
+            'measures' => ['count', 'sum'],
+            'expectedFile' => 'empty.md',
+        ];
+
+        yield '1u2m, pivoted values' => [
             'inputFile' => 'cube.json',
             'unpivoted' => ['name'],
             'pivoted' => ['@values'],
-            'measureFields' => ['count', 'sum'],
-            'expectedFile' => 'basic.md',
+            'measures' => ['count', 'sum'],
+            'expectedFile' => '1u2m-pivoted-values.md',
+        ];
+
+        yield '1u2m, unpivoted values' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['name', '@values'],
+            'pivoted' => [],
+            'measures' => ['count', 'sum'],
+            'expectedFile' => '1u2m-unpivoted-values.md',
         ];
     }
 }

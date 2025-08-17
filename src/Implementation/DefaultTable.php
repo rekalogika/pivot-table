@@ -87,6 +87,12 @@ final readonly class DefaultTable implements \Countable, Table, \IteratorAggrega
     #[\Override]
     public function count(): int
     {
-        return \count($this->rowGroups);
+        $result = 0;
+
+        foreach ($this->rowGroups as $rowGroup) {
+            $result += \count($rowGroup);
+        }
+
+        return $result;
     }
 }

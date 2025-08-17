@@ -20,12 +20,12 @@ final class ArrayTable implements Table
     /**
      * @param iterable<ArrayRow> $rows
      * @param array<string,mixed> $legends
-     * @param array<string,mixed>|string $subtotalLegend
+     * @param array<string,mixed>|string $subtotalLabels
      */
     public function __construct(
         private readonly iterable $rows,
         private readonly array $legends,
-        private readonly array|string $subtotalLegend = 'Total',
+        private readonly array|string $subtotalLabels,
     ) {}
 
     /**
@@ -44,12 +44,12 @@ final class ArrayTable implements Table
     }
 
     #[\Override]
-    public function getSubtotalLegend(string $key): mixed
+    public function getSubtotalLabel(string $key): mixed
     {
-        if (\is_string($this->subtotalLegend)) {
-            return $this->subtotalLegend;
+        if (\is_string($this->subtotalLabels)) {
+            return $this->subtotalLabels;
         }
 
-        return $this->subtotalLegend[$key] ?? 'Total';
+        return $this->subtotalLabels[$key] ?? 'Total';
     }
 }

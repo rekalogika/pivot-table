@@ -27,5 +27,5 @@ interface Table
      */
     public function getLegend(string $key): mixed;
 
-    public function getSubtotalLegend(string $key): mixed;
+    public function getSubtotalLabel(string $key): mixed;
 }

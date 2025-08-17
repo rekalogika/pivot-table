@@ -113,24 +113,24 @@ abstract class Block implements \Stringable
     }
 
     /**
-     * @param list<string> $unpivotedNodes
-     * @param list<string> $pivotedNodes
+     * @param list<string> $unpivoted
+     * @param list<string> $pivoted
      * @param list<string> $skipLegends
-     * @param list<string> $createSubtotals
+     * @param list<string> $withSubtotal
      */
     final public static function new(
         CubeCellDecorator $cubeCell,
-        array $unpivotedNodes = [],
-        array $pivotedNodes = [],
+        array $unpivoted = [],
+        array $pivoted = [],
         array $skipLegends = ['@values'],
-        array $createSubtotals = [],
+        array $withSubtotal = [],
     ): Block {
         $context = new BlockContext(
             apexCubeCell: $cubeCell,
-            unpivotedKeys: $unpivotedNodes,
-            pivotedKeys: $pivotedNodes,
+            unpivotedKeys: $unpivoted,
+            pivotedKeys: $pivoted,
             skipLegends: $skipLegends,
-            createSubtotals: $createSubtotals,
+            createSubtotals: $withSubtotal,
         );
 
         return new RootBlock($cubeCell, $context);
