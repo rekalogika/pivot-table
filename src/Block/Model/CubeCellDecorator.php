@@ -178,7 +178,7 @@ final readonly class CubeCellDecorator implements CubeCell
 
         foreach ($this->measures as $measureName) {
             yield $newCubes[$measureName] ?? throw new \InvalidArgumentException(
-                "Measure '$measureName' not found in the cube.",
+                "Measure '$measureName' not found in the cube. Available measures: [" . implode(', ', array_keys($newCubes)) . "].",
             );
         }
     }
@@ -236,8 +236,6 @@ final readonly class CubeCellDecorator implements CubeCell
      */
     public function drillDownWithoutBalancing(string $dimensionName): iterable
     {
-
-
         foreach ($this->drillDown($dimensionName) as $cube) {
             if ($cube->isNull()) {
                 continue;
