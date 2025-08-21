@@ -19,11 +19,6 @@ phpstan:
 psalm:
 	$(PHP) vendor/bin/psalm
 
-.PHONY: phpunit
-phpunit:
-	$(eval c ?=)
-	$(PHP) vendor/bin/phpunit $(c)
-
 .PHONY: rector
 rector:
 	$(PHP) vendor/bin/rector process > rector.log
@@ -41,3 +36,45 @@ tools/php-cs-fixer:
 clean:
 	$(PHP) vendor/bin/psalm --clear-cache
 	rm tests/output/*.md || true
+
+#
+# tests
+#
+
+.PHONY: phpunit
+phpunit:
+	$(eval c ?=)
+	$(PHP) vendor/bin/phpunit $(c)
+
+.PHONY: output-remove
+output-remove:
+	rm -f tests/output/*.md || true
+
+.PHONY: output-copy
+output-copy:
+	cp tests/output/*.md tests/expectation/
+
+.PHONY: output-regenerate
+output-regenerate:
+	make output-remove
+	make phpunit || true
+	make output-copy
+
+#
+# compose & test data regeneration
+#
+
+.PHONY: compose-up
+compose-up:
+	cd tests && docker compose up -d --wait
+
+.PHONY: compose-down
+compose-down:
+	cd tests && docker compose down
+
+.PHONY: compose-restart
+compose-restart: compose-down compose-up
+
+.PHONY: regenerate
+regenerate: compose-up
+	cd tests && docker compose exec --user $$(id -u):$$(id -g) database psql -U app -d app -f /resultset/generate.sql

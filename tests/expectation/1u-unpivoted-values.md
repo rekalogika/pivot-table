@@ -6,10 +6,10 @@
   </thead>
   <tbody>
     <tr>
-      <td>itemB</td>
+      <td>itemA</td>
     </tr>
     <tr>
-      <td>itemA</td>
+      <td>itemB</td>
     </tr>
     <tr>
       <td>itemC</td>

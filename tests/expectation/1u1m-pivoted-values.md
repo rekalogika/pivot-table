@@ -7,16 +7,16 @@
   </thead>
   <tbody>
     <tr>
-      <td>itemB</td>
-      <td>31</td>
+      <td>itemA</td>
+      <td>34</td>
     </tr>
     <tr>
-      <td>itemA</td>
-      <td>21</td>
+      <td>itemB</td>
+      <td>42</td>
     </tr>
     <tr>
       <td>itemC</td>
-      <td>46</td>
+      <td>35</td>
     </tr>
   </tbody>
 </table>
