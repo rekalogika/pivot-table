@@ -42,7 +42,7 @@ clean:
 #
 
 .PHONY: phpunit
-phpunit:
+phpunit: output-remove
 	$(eval c ?=)
 	$(PHP) vendor/bin/phpunit $(c)
 
@@ -56,7 +56,6 @@ output-copy:
 
 .PHONY: output-regenerate
 output-regenerate:
-	make output-remove
 	make phpunit || true
 	make output-copy
 

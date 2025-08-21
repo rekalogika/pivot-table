@@ -266,5 +266,14 @@ final class PivotTableTest extends TestCase
             'subtotals' => ['name'],
             'expectedFile' => '1p2m-values-first-pivoted-subtotals.md',
         ];
+
+        yield '1p2u1m, value first pivoted, subtotal' => [
+            'inputFile' => 'cube.json',
+            'unpivoted' => ['country', 'month'],
+            'pivoted' => ['name', '@values'],
+            'measures' => ['count'],
+            'subtotals' => ['name', 'country', 'month'],
+            'expectedFile' => '1p2u1m-values-pivoted-subtotals.md',
+        ];
     }
 }
