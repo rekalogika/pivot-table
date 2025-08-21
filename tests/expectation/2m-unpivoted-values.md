@@ -7,11 +7,11 @@
   <tbody>
     <tr>
       <td>Count</td>
-      <td>98</td>
+      <td>111</td>
     </tr>
     <tr>
       <td>Sum</td>
-      <td>51729.91</td>
+      <td>59831.17</td>
     </tr>
   </tbody>
 </table>

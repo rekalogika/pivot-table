@@ -1,6 +1,3 @@
-To generate the test data:
-
-```sql
 -- Drop the table if it exists
 DROP TABLE IF EXISTS items;
 
@@ -44,14 +41,9 @@ BEGIN
         END LOOP;
     END LOOP;
 END $$;
-```
 
-Export to JSON:
+\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by distinct cube(name, country, month) order by name, country, month) items) to '/resultset/cube.json';
 
-```sql
-\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by distinct cube(name, country, month)) items order by name, country, month) to 'cube.json';
+\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items group by distinct rollup(name, country, month) order by name, country, month) items) to '/resultset/rollup.json';
 
-\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price), grouping(name, country, month) from items order by name, country, month group by distinct rollup(name, country, month)) items) to 'rollup.json';
-
-\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price) from items order by name, country, month group by name, country, month) items) to 'nogrouping.json';
-```
+\copy (select json_agg(row_to_json(items)) from (select name, country, month, count(*), sum(price) from items group by name, country, month order by name, country, month) items) to '/resultset/nogrouping.json';

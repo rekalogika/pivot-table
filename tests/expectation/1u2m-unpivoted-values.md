@@ -7,31 +7,31 @@
   </thead>
   <tbody>
     <tr>
-      <td rowspan="2">itemB</td>
-      <td>Count</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <td>Sum</td>
-      <td>13868.41</td>
-    </tr>
-    <tr>
       <td rowspan="2">itemA</td>
       <td>Count</td>
-      <td>21</td>
+      <td>34</td>
     </tr>
     <tr>
       <td>Sum</td>
-      <td>12663.42</td>
+      <td>18599.41</td>
+    </tr>
+    <tr>
+      <td rowspan="2">itemB</td>
+      <td>Count</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>Sum</td>
+      <td>21918.68</td>
     </tr>
     <tr>
       <td rowspan="2">itemC</td>
       <td>Count</td>
-      <td>46</td>
+      <td>35</td>
     </tr>
     <tr>
       <td>Sum</td>
-      <td>25198.08</td>
+      <td>19313.08</td>
     </tr>
   </tbody>
 </table>
