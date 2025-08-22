@@ -9,7 +9,7 @@
       <td>itemA</td>
       <td>itemB</td>
       <td>itemC</td>
-      <td>Total</td>
+      <td>All names</td>
     </tr>
     <tr>
       <th>Count</th>
@@ -28,6 +28,13 @@
       <td>10</td>
     </tr>
     <tr>
+      <td>202502</td>
+      <td>null</td>
+      <td>5</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
       <td>202503</td>
       <td>4</td>
       <td>5</td>
@@ -42,13 +49,6 @@
       <td>3</td>
     </tr>
     <tr>
-      <td>202502</td>
-      <td>null</td>
-      <td>5</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
       <td>202505</td>
       <td>null</td>
       <td>3</td>
@@ -56,7 +56,7 @@
       <td>3</td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td>All months</td>
       <td>11</td>
       <td>14</td>
       <td>9</td>
@@ -69,6 +69,13 @@
       <td>3</td>
       <td>4</td>
       <td>8</td>
+    </tr>
+    <tr>
+      <td>202502</td>
+      <td>5</td>
+      <td>1</td>
+      <td>5</td>
+      <td>11</td>
     </tr>
     <tr>
       <td>202503</td>
@@ -85,13 +92,6 @@
       <td>10</td>
     </tr>
     <tr>
-      <td>202502</td>
-      <td>5</td>
-      <td>1</td>
-      <td>5</td>
-      <td>11</td>
-    </tr>
-    <tr>
       <td>202505</td>
       <td>null</td>
       <td>1</td>
@@ -99,7 +99,7 @@
       <td>2</td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td>All months</td>
       <td>9</td>
       <td>13</td>
       <td>17</td>
@@ -112,6 +112,13 @@
       <td>null</td>
       <td>2</td>
       <td>2</td>
+    </tr>
+    <tr>
+      <td>202502</td>
+      <td>5</td>
+      <td>3</td>
+      <td>1</td>
+      <td>9</td>
     </tr>
     <tr>
       <td>202503</td>
@@ -128,13 +135,6 @@
       <td>8</td>
     </tr>
     <tr>
-      <td>202502</td>
-      <td>5</td>
-      <td>3</td>
-      <td>1</td>
-      <td>9</td>
-    </tr>
-    <tr>
       <td>202505</td>
       <td>5</td>
       <td>2</td>
@@ -142,19 +142,26 @@
       <td>7</td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td>All months</td>
       <td>14</td>
       <td>15</td>
       <td>9</td>
       <td>38</td>
     </tr>
     <tr>
-      <td rowspan="6">Total</td>
+      <td rowspan="6">All countries</td>
       <td>202501</td>
       <td>5</td>
       <td>4</td>
       <td>11</td>
       <td>20</td>
+    </tr>
+    <tr>
+      <td>202502</td>
+      <td>10</td>
+      <td>9</td>
+      <td>7</td>
+      <td>26</td>
     </tr>
     <tr>
       <td>202503</td>
@@ -171,13 +178,6 @@
       <td>21</td>
     </tr>
     <tr>
-      <td>202502</td>
-      <td>10</td>
-      <td>9</td>
-      <td>7</td>
-      <td>26</td>
-    </tr>
-    <tr>
       <td>202505</td>
       <td>5</td>
       <td>6</td>
@@ -185,7 +185,7 @@
       <td>12</td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td>All months</td>
       <td>34</td>
       <td>42</td>
       <td>35</td>

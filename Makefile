@@ -77,3 +77,7 @@ compose-restart: compose-down compose-up
 .PHONY: regenerate
 regenerate: compose-up
 	cd tests && docker compose exec --user $$(id -u):$$(id -g) database psql -U app -d app -f /resultset/generate.sql
+
+.PHONY: psql
+psql:
+	cd tests && docker compose exec --user $$(id -u):$$(id -g) database psql -U app -d app

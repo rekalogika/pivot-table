@@ -96,8 +96,27 @@ final class ArrayTableFactory
 
     private function getTable(): ArrayTable
     {
+        // rows with only one dimension are placed before the others, so we will
+        // be able to know the ordering of the dimension without a separate
+        // query.
+
+        $rows = $this->createRows($this->input);
+
+        $rowsWithSingleDimension = [];
+        $rest = [];
+
+        foreach ($rows as $row) {
+            if ($row->hasExactlyOneDimension()) {
+                $rowsWithSingleDimension[] = $row;
+            } else {
+                $rest[] = $row;
+            }
+        }
+
+        $rows = [...$rowsWithSingleDimension, ...$rest];
+
         return new ArrayTable(
-            rows: $this->createRows($this->input),
+            rows: $rows,
             legends: $this->legends,
             subtotalLabels: $this->subtotalLabels,
         );
@@ -130,6 +149,14 @@ final class ArrayTableFactory
 
         return ($grouping & (1 << ($bit - 1))) !== 0;
     }
+
+    // private static function hasSingleNonGrouping(int $grouping): bool
+    // {
+    //     $bits = PHP_INT_SIZE * 8;
+    //     $mask = (1 << $bits) - 1;
+    //     $y = (~$grouping) & $mask;
+    //     return $y !== 0 && ($y & ($y - 1)) === 0;
+    // }
 
     /**
      * @param iterable<array<string,mixed>> $input

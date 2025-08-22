@@ -34,7 +34,7 @@
       <td>19313.08</td>
     </tr>
     <tr>
-      <td rowspan="2">Total</td>
+      <td rowspan="2">All names</td>
       <td>Count</td>
       <td>111</td>
     </tr>

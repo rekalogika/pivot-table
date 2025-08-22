@@ -19,7 +19,7 @@
       <td>35</td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td>All names</td>
       <td>111</td>
     </tr>
   </tbody>

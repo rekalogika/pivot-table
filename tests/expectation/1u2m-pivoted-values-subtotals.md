@@ -23,7 +23,7 @@
       <td>19313.08</td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td>All names</td>
       <td>111</td>
       <td>59831.17</td>
     </tr>
