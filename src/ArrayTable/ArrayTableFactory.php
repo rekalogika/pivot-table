@@ -113,7 +113,7 @@ final class ArrayTableFactory
             }
         }
 
-        $rows = [...$rowsWithSingleDimension, ...$rest];
+        $rows = array_merge($rowsWithSingleDimension, $rest);
 
         return new ArrayTable(
             rows: $rows,
