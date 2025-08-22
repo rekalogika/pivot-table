@@ -150,14 +150,6 @@ final class ArrayTableFactory
         return ($grouping & (1 << ($bit - 1))) !== 0;
     }
 
-    // private static function hasSingleNonGrouping(int $grouping): bool
-    // {
-    //     $bits = PHP_INT_SIZE * 8;
-    //     $mask = (1 << $bits) - 1;
-    //     $y = (~$grouping) & $mask;
-    //     return $y !== 0 && ($y & ($y - 1)) === 0;
-    // }
-
     /**
      * @param iterable<array<string,mixed>> $input
      * @return iterable<ArrayRow>
