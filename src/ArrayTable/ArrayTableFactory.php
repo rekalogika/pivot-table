@@ -41,7 +41,7 @@ final class ArrayTableFactory
             measureFields: $measureFields,
             groupingField: $groupingField,
             legends: $legends,
-            subtotalLabels: 'Total',
+            subtotalLabels: $subtotalLabels,
         );
 
         return $self->getTable();
