@@ -96,8 +96,27 @@ final class ArrayTableFactory
 
     private function getTable(): ArrayTable
     {
+        // rows with only one dimension are placed before the others, so we will
+        // be able to know the ordering of the dimension without a separate
+        // query.
+
+        $rows = $this->createRows($this->input);
+
+        $rowsWithSingleDimension = [];
+        $rest = [];
+
+        foreach ($rows as $row) {
+            if ($row->hasExactlyOneDimension()) {
+                $rowsWithSingleDimension[] = $row;
+            } else {
+                $rest[] = $row;
+            }
+        }
+
+        $rows = array_merge($rowsWithSingleDimension, $rest);
+
         return new ArrayTable(
-            rows: $this->createRows($this->input),
+            rows: $rows,
             legends: $this->legends,
             subtotalLabels: $this->subtotalLabels,
         );

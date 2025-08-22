@@ -12,11 +12,11 @@
       <td>itemA</td>
       <td>itemB</td>
       <td>itemC</td>
-      <td>Total</td>
+      <td>All names</td>
       <td>itemA</td>
       <td>itemB</td>
       <td>itemC</td>
-      <td>Total</td>
+      <td>All names</td>
     </tr>
   </thead>
   <tbody>

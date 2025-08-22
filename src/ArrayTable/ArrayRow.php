@@ -37,4 +37,9 @@ final class ArrayRow implements Row
     {
         return $this->measures;
     }
+
+    public function hasExactlyOneDimension(): bool
+    {
+        return \count($this->dimensions) === 1;
+    }
 }
