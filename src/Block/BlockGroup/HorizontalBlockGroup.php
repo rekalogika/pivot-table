@@ -82,24 +82,59 @@ final class HorizontalBlockGroup extends BlockGroup
         $firstPivoted = $this->getContext()->getFirstPivotedKey();
         $currentKeys = array_keys($this->getCube()->getTuple());
         $existsInTuple = \in_array($firstPivoted, $currentKeys, true);
+        $childKey = $this->getChildKey();
 
         if ($firstPivoted === null || !$existsInTuple) {
             $result = $this->getContext()
                 ->getApexCubeCell()
-                ->drillDownWithoutBalancing($this->getChildKey());
+                ->drillDownWithoutBalancing($childKey);
+
+            $result = iterator_to_array($result, false);
+
+            if ($result === []) {
+                $result = $this->getContext()
+                    ->getApexCubeCell()
+                    ->drillDown($childKey);
+
+                $result = iterator_to_array($result, false);
+            }
+
+            if ($result === []) {
+                throw new \RuntimeException(\sprintf(
+                    'No prototype nodes found for child key "%s".',
+                    $childKey,
+                ));
+            }
         } else {
             $result = $this->getCube()
                 ->rollUpAllExcept([$firstPivoted])
-                ->drillDownWithoutBalancing($this->getChildKey());
-        }
+                ->drillDownWithoutBalancing($childKey);
 
-        $result = array_values(iterator_to_array($result));
+            $result = iterator_to_array($result, false);
 
-        if ($result === []) {
-            throw new \RuntimeException(\sprintf(
-                'No prototype nodes found for child key "%s".',
-                $this->getChildKey(),
-            ));
+            if ($result === []) {
+                // fallback to apex cube if no prototype found
+                $result = $this->getContext()
+                    ->getApexCubeCell()
+                    ->drillDownWithoutBalancing($childKey);
+
+                $result = iterator_to_array($result, false);
+            }
+
+            if ($result === []) {
+                $result = $this->getContext()
+                    ->getApexCubeCell()
+                    ->drillDown($childKey);
+
+                $result = iterator_to_array($result, false);
+            }
+
+            if ($result === []) {
+                throw new \RuntimeException(\sprintf(
+                    'No prototype nodes found for child key "%s".',
+                    $childKey,
+                ));
+            }
         }
 
         return $result;
