@@ -1,7 +1,13 @@
 {
     "name": "rekalogika/pivot-table",
-    "description": "A PHP library for transforming multidimensional data into a pivot table.",
+    "description": "Transforms multidimensional data into a pivot table.",
     "homepage": "https://rekalogika.dev/pivot-table",
+    "keywords": [
+        "pivot",
+        "pivot-table",
+        "olap",
+        "olap-cube"
+    ],
     "license": "MIT",
     "authors": [
         {
