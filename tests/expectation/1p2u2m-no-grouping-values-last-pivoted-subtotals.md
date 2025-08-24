@@ -42,8 +42,8 @@
       <td>null</td>
       <td>null</td>
       <td>null</td>
-      <td>11</td>
-      <td>6711.34</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>JP</td>
@@ -57,8 +57,8 @@
       <td>3119.07</td>
       <td>null</td>
       <td>null</td>
-      <td>9</td>
-      <td>5240.9</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>KR</td>
@@ -72,8 +72,8 @@
       <td>1668.59</td>
       <td>5</td>
       <td>2231.2</td>
-      <td>14</td>
-      <td>6647.17</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>All countries</td>
@@ -87,8 +87,8 @@
       <td>null</td>
       <td>null</td>
       <td>null</td>
-      <td>34</td>
-      <td>18599.41</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td rowspan="4">itemB</td>
@@ -103,8 +103,8 @@
       <td>2575.55</td>
       <td>3</td>
       <td>1845.78</td>
-      <td>14</td>
-      <td>7704.56</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>JP</td>
@@ -118,8 +118,8 @@
       <td>393.39</td>
       <td>1</td>
       <td>973.91</td>
-      <td>13</td>
-      <td>7093.02</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>KR</td>
@@ -133,8 +133,8 @@
       <td>2239.52</td>
       <td>2</td>
       <td>458.68</td>
-      <td>15</td>
-      <td>7121.1</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>All countries</td>
@@ -148,8 +148,8 @@
       <td>null</td>
       <td>null</td>
       <td>null</td>
-      <td>42</td>
-      <td>21918.68</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td rowspan="4">itemC</td>
@@ -164,8 +164,8 @@
       <td>337.29</td>
       <td>null</td>
       <td>null</td>
-      <td>9</td>
-      <td>5201.2</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>JP</td>
@@ -179,8 +179,8 @@
       <td>2081.02</td>
       <td>1</td>
       <td>725.8</td>
-      <td>17</td>
-      <td>9270.44</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>KR</td>
@@ -194,8 +194,8 @@
       <td>240.94</td>
       <td>null</td>
       <td>null</td>
-      <td>9</td>
-      <td>4841.44</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td>All countries</td>
@@ -209,8 +209,8 @@
       <td>null</td>
       <td>null</td>
       <td>null</td>
-      <td>35</td>
-      <td>19313.08</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
     <tr>
       <td rowspan="4">All names</td>
@@ -270,8 +270,8 @@
       <td>null</td>
       <td>null</td>
       <td>null</td>
-      <td>111</td>
-      <td>59831.17</td>
+      <td>null</td>
+      <td>null</td>
     </tr>
   </tbody>
 </table>

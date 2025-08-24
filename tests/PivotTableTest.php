@@ -36,6 +36,7 @@ final class PivotTableTest extends TestCase
         array $measures,
         string $expectedFile,
         ?array $subtotals = null,
+        bool $hasGrouping = true,
     ): void {
         $inputFilePath = __DIR__ . '/resultset/' . $inputFile;
         $this->assertFileExists($inputFilePath);
@@ -53,7 +54,7 @@ final class PivotTableTest extends TestCase
             input: $data,
             dimensionFields: ['name', 'country', 'month'],
             measureFields: ['count', 'sum'],
-            groupingField: 'grouping',
+            groupingField: $hasGrouping ? 'grouping' : null,
             legends: [
                 '@values' => 'Values',
                 'name' => 'Name',
@@ -118,7 +119,7 @@ final class PivotTableTest extends TestCase
     /**
      * Data provider for testPivotTable.
      *
-     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measures:list<string>,expectedFile:string,subtotals?:list<string>}>
+     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measures:list<string>,expectedFile:string,subtotals?:list<string>,hasGrouping?:bool}>
      */
     public static function dataProvider(): iterable
     {
@@ -310,6 +311,26 @@ final class PivotTableTest extends TestCase
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
             'expectedFile' => '1p2u2m-rollup-values-first-pivoted-subtotals.md',
+        ];
+
+        yield '1p2u2m, no grouping, value last pivoted, subtotal' => [
+            'inputFile' => 'nogrouping.json',
+            'unpivoted' => ['name', 'country'],
+            'pivoted' => ['month', '@values'],
+            'measures' => ['count', 'sum'],
+            'subtotals' => ['name', 'country', 'month'],
+            'expectedFile' => '1p2u2m-no-grouping-values-last-pivoted-subtotals.md',
+            'hasGrouping' => false,
+        ];
+
+        yield '1p2u2m, no grouping, value first pivoted, subtotal' => [
+            'inputFile' => 'nogrouping.json',
+            'unpivoted' => ['name', 'country'],
+            'pivoted' => ['@values', 'month'],
+            'measures' => ['count', 'sum'],
+            'subtotals' => ['name', 'country', 'month'],
+            'expectedFile' => '1p2u2m-no-grouping-values-first-pivoted-subtotals.md',
+            'hasGrouping' => false,
         ];
     }
 }

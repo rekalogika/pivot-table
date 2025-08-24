@@ -210,7 +210,65 @@
       <td>19313.08</td>
     </tr>
     <tr>
-      <td>All names</td>
+      <td rowspan="4">All names</td>
+      <td>CN</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+    </tr>
+    <tr>
+      <td>JP</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+    </tr>
+    <tr>
+      <td>KR</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+    </tr>
+    <tr>
+      <td>All countries</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>111</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>null</td>
+      <td>59831.17</td>
     </tr>
   </tbody>
 </table>
