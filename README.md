@@ -112,8 +112,8 @@ $cube = ArrayTableFactory::createCube(
 // Transform the cube to HTML table object
 $htmlTable = PivotTableTransformer::transform(
     cube: $cube,
-    unpivoted: ['country', 'month'],    // Rows
-    pivoted: ['@values', 'name'],       // Columns  
+    rows: ['country', 'month'],         // Rows
+    columns: ['@values', 'name'],       // Columns  
     measures: ['count', 'sum'],         // Which measures to include
     withSubtotal: ['name', 'country'],  // Add subtotals for these dimensions
 );

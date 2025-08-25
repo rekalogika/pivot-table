@@ -25,16 +25,16 @@ final readonly class PivotTableTransformer
     /**
      * @todo rename nodes to dimensions
      *
-     * @param list<string> $unpivoted
-     * @param list<string> $pivoted
+     * @param list<string> $rows
+     * @param list<string> $columns
      * @param list<string> $skipLegends
      * @param list<string> $measures
      * @param list<string> $withSubtotal
      */
     public static function transform(
         Cube $cube,
-        array $unpivoted = [],
-        array $pivoted = [],
+        array $rows = [],
+        array $columns = [],
         array $measures = [],
         array $skipLegends = ['@values'],
         array $withSubtotal = [],
@@ -43,8 +43,8 @@ final readonly class PivotTableTransformer
 
         $block = Block::new(
             cubeCell: $cubeCell,
-            unpivoted: $unpivoted,
-            pivoted: $pivoted,
+            unpivoted: $rows,
+            pivoted: $columns,
             skipLegends: $skipLegends,
             withSubtotal: $withSubtotal,
         );
