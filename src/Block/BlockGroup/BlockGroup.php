@@ -76,14 +76,19 @@ abstract class BlockGroup extends Block
 
         if ($prototypeCubes === []) {
             $children = $this->cube->drillDownWithoutBalancing($this->getChildKey());
+            $children = iterator_to_array($children, false);
+
+            if ($children === []) {
+                $children = $this->cube->drillDown($this->getChildKey());
+                $children = iterator_to_array($children, false);
+            }
         } else {
             $children = $this->cube->drillDownWithPrototypes(
                 dimensionName: $this->getChildKey(),
                 prototypeCubeCells: $prototypeCubes,
             );
+            $children = iterator_to_array($children, false);
         }
-
-        $children = iterator_to_array($children, preserve_keys: true);
 
         if (\count($children) >= 2) {
             $subtotalNode = $this->getSubtotalCube();
@@ -93,7 +98,7 @@ abstract class BlockGroup extends Block
             }
         }
 
-        return $this->childCubes = array_values($children);
+        return $this->childCubes = $children;
     }
 
     protected function getOneChildCube(): CubeCellDecorator

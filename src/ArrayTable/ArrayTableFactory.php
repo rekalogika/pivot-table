@@ -31,7 +31,7 @@ final class ArrayTableFactory
         iterable $input,
         array $dimensionFields,
         array $measureFields,
-        string $groupingField,
+        ?string $groupingField,
         array $legends,
         array|string $subtotalLabels = 'Total',
     ): ArrayTable {
@@ -60,7 +60,7 @@ final class ArrayTableFactory
         iterable $input,
         array $dimensionFields,
         array $measureFields,
-        string $groupingField,
+        ?string $groupingField,
         array $legends,
         array|string $subtotalLabels = 'Total',
     ): Cube {
@@ -89,7 +89,7 @@ final class ArrayTableFactory
         private readonly iterable $input,
         private readonly array $dimensionFields,
         private readonly array $measureFields,
-        private readonly string $groupingField,
+        private readonly ?string $groupingField,
         private readonly array $legends,
         private readonly array|string $subtotalLabels,
     ) {}
@@ -168,8 +168,13 @@ final class ArrayTableFactory
      */
     private function createRow(array $input): ArrayRow
     {
-        $grouping = $input[$this->groupingField]
-            ?? throw new \InvalidArgumentException("Missing grouping field: {$this->groupingField}");
+        if ($this->groupingField === null) {
+            $grouping = 0;
+        } else {
+            /** @psalm-suppress MixedAssignment */
+            $grouping = $input[$this->groupingField]
+                ?? throw new \InvalidArgumentException("Missing grouping field: {$this->groupingField}");
+        }
 
         if (!\is_int($grouping)) {
             throw new \InvalidArgumentException("Grouping field must be an integer: {$this->groupingField}");
