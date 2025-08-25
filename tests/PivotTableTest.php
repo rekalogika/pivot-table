@@ -22,8 +22,8 @@ final class PivotTableTest extends TestCase
 {
     /**
      * @param string $inputFile
-     * @param list<string> $unpivoted
-     * @param list<string> $pivoted
+     * @param list<string> $rows
+     * @param list<string> $columns
      * @param list<string> $measures
      * @param list<string> $subtotals
      * @param string $expectedFile
@@ -31,8 +31,8 @@ final class PivotTableTest extends TestCase
      */
     public function testPivotTable(
         string $inputFile,
-        array $unpivoted,
-        array $pivoted,
+        array $rows,
+        array $columns,
         array $measures,
         string $expectedFile,
         ?array $subtotals = null,
@@ -73,8 +73,8 @@ final class PivotTableTest extends TestCase
         // convert cube to html table object
         $htmlTable = PivotTableTransformer::transform(
             cube: $cube,
-            unpivoted: $unpivoted,
-            pivoted: $pivoted,
+            rows: $rows,
+            columns: $columns,
             measures: $measures,
             skipLegends: ['@values'],
             withSubtotal: $subtotals ?? [],
@@ -119,217 +119,217 @@ final class PivotTableTest extends TestCase
     /**
      * Data provider for testPivotTable.
      *
-     * @return iterable<string,array{inputFile:string,unpivoted:list<string>,pivoted:list<string>,measures:list<string>,expectedFile:string,subtotals?:list<string>,hasGrouping?:bool}>
+     * @return iterable<string,array{inputFile:string,rows:list<string>,columns:list<string>,measures:list<string>,expectedFile:string,subtotals?:list<string>,hasGrouping?:bool}>
      */
     public static function dataProvider(): iterable
     {
-        // 1u 2p 3m = 1 unpivoted dimensions, 2 pivoted dimensions, 3 measures
+        // 1r 2c 3m = 1 rows dimensions, 2 columns dimensions, 3 measures
 
         yield 'empty' => [
             'inputFile' => 'empty.json',
-            'unpivoted' => ['name'],
-            'pivoted' => ['@values'],
+            'rows' => ['name'],
+            'columns' => ['@values'],
             'measures' => ['count', 'sum'],
             'expectedFile' => 'empty.md',
         ];
 
-        yield '1m, pivoted values' => [
+        yield '1m, columns values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => [],
-            'pivoted' => ['@values'],
+            'rows' => [],
+            'columns' => ['@values'],
             'measures' => ['count'],
-            'expectedFile' => '1m-pivoted-values.md',
+            'expectedFile' => '1m-columns-values.md',
         ];
 
-        yield '1m, unpivoted values' => [
+        yield '1m, rows values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['@values'],
-            'pivoted' => [],
+            'rows' => ['@values'],
+            'columns' => [],
             'measures' => ['count'],
-            'expectedFile' => '1m-unpivoted-values.md',
+            'expectedFile' => '1m-rows-values.md',
         ];
 
-        yield '2m, pivoted values' => [
+        yield '2m, columns values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => [],
-            'pivoted' => ['@values'],
+            'rows' => [],
+            'columns' => ['@values'],
             'measures' => ['count', 'sum'],
-            'expectedFile' => '2m-pivoted-values.md',
+            'expectedFile' => '2m-columns-values.md',
         ];
 
-        yield '2m, unpivoted values' => [
+        yield '2m, rows values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['@values'],
-            'pivoted' => [],
+            'rows' => ['@values'],
+            'columns' => [],
             'measures' => ['count', 'sum'],
-            'expectedFile' => '2m-unpivoted-values.md',
+            'expectedFile' => '2m-rows-values.md',
         ];
 
         // maybe revisit?
-        yield '1u, unpivoted values' => [
+        yield '1r, rows values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name', '@values'],
-            'pivoted' => [],
+            'rows' => ['name', '@values'],
+            'columns' => [],
             'measures' => [],
-            'expectedFile' => '1u-unpivoted-values.md',
+            'expectedFile' => '1r-rows-values.md',
         ];
 
-        yield '1p, unpivoted values' => [
+        yield '1c, rows values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['@values'],
-            'pivoted' => ['name'],
+            'rows' => ['@values'],
+            'columns' => ['name'],
             'measures' => [],
-            'expectedFile' => '1p-unpivoted-values.md',
+            'expectedFile' => '1c-rows-values.md',
         ];
 
-        yield '1u1m, pivoted values' => [
+        yield '1r1m, columns values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name'],
-            'pivoted' => ['@values'],
+            'rows' => ['name'],
+            'columns' => ['@values'],
             'measures' => ['count'],
-            'expectedFile' => '1u1m-pivoted-values.md',
+            'expectedFile' => '1r1m-columns-values.md',
         ];
 
-        yield '1u1m, unpivoted values' => [
+        yield '1r1m, rows values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name', '@values'],
-            'pivoted' => [],
+            'rows' => ['name', '@values'],
+            'columns' => [],
             'measures' => ['count'],
-            'expectedFile' => '1u1m-unpivoted-values.md',
+            'expectedFile' => '1r1m-rows-values.md',
         ];
 
-        yield '1u1m, pivoted values, subtotal' => [
+        yield '1r1m, columns values, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name'],
-            'pivoted' => ['@values'],
-            'measures' => ['count'],
-            'subtotals' => ['name'],
-            'expectedFile' => '1u1m-pivoted-values-subtotals.md',
-        ];
-
-        yield '1u1m, unpivoted values, subtotal' => [
-            'inputFile' => 'cube.json',
-            'unpivoted' => ['name', '@values'],
-            'pivoted' => [],
+            'rows' => ['name'],
+            'columns' => ['@values'],
             'measures' => ['count'],
             'subtotals' => ['name'],
-            'expectedFile' => '1u1m-unpivoted-values-subtotals.md',
+            'expectedFile' => '1r1m-columns-values-subtotals.md',
         ];
 
-        yield '1u2m, pivoted values' => [
+        yield '1r1m, rows values, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name'],
-            'pivoted' => ['@values'],
+            'rows' => ['name', '@values'],
+            'columns' => [],
+            'measures' => ['count'],
+            'subtotals' => ['name'],
+            'expectedFile' => '1r1m-rows-values-subtotals.md',
+        ];
+
+        yield '1r2m, columns values' => [
+            'inputFile' => 'cube.json',
+            'rows' => ['name'],
+            'columns' => ['@values'],
             'measures' => ['count', 'sum'],
-            'expectedFile' => '1u2m-pivoted-values.md',
+            'expectedFile' => '1r2m-columns-values.md',
         ];
 
-        yield '1u2m, unpivoted values' => [
+        yield '1r2m, rows values' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name', '@values'],
-            'pivoted' => [],
+            'rows' => ['name', '@values'],
+            'columns' => [],
             'measures' => ['count', 'sum'],
-            'expectedFile' => '1u2m-unpivoted-values.md',
+            'expectedFile' => '1r2m-rows-values.md',
         ];
 
-        yield '1u2m, pivoted values, subtotal' => [
+        yield '1r2m, columns values, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name'],
-            'pivoted' => ['@values'],
+            'rows' => ['name'],
+            'columns' => ['@values'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name'],
-            'expectedFile' => '1u2m-pivoted-values-subtotals.md',
+            'expectedFile' => '1r2m-columns-values-subtotals.md',
         ];
 
-        yield '1u2m, unpivoted values, subtotal' => [
+        yield '1r2m, rows values, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['name', '@values'],
-            'pivoted' => [],
+            'rows' => ['name', '@values'],
+            'columns' => [],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name'],
-            'expectedFile' => '1u2m-unpivoted-values-subtotals.md',
+            'expectedFile' => '1r2m-rows-values-subtotals.md',
         ];
 
-        yield '1u2m, value first unpivoted, subtotal' => [
+        yield '1r2m, value first rows, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['@values', 'name'],
-            'pivoted' => [],
+            'rows' => ['@values', 'name'],
+            'columns' => [],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name'],
-            'expectedFile' => '1u2m-values-first-unpivoted-subtotals.md',
+            'expectedFile' => '1r2m-values-first-rows-subtotals.md',
         ];
 
-        yield '1p2m, value first pivoted, subtotal' => [
+        yield '1c2m, value first columns, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => [],
-            'pivoted' => ['@values', 'name'],
+            'rows' => [],
+            'columns' => ['@values', 'name'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name'],
-            'expectedFile' => '1p2m-values-first-pivoted-subtotals.md',
+            'expectedFile' => '1c2m-values-first-columns-subtotals.md',
         ];
 
-        yield '1p2u1m, value first pivoted, subtotal' => [
+        yield '1c2r1m, value first columns, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['country', 'month'],
-            'pivoted' => ['name', '@values'],
+            'rows' => ['country', 'month'],
+            'columns' => ['name', '@values'],
             'measures' => ['count'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u1m-values-pivoted-subtotals.md',
+            'expectedFile' => '1c2r1m-values-columns-subtotals.md',
         ];
 
-        yield '1p2u2m, value last pivoted, subtotal' => [
+        yield '1c2r2m, value last columns, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['country', 'month'],
-            'pivoted' => ['name', '@values'],
+            'rows' => ['country', 'month'],
+            'columns' => ['name', '@values'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u2m-values-last-pivoted-subtotals.md',
+            'expectedFile' => '1c2r2m-values-last-columns-subtotals.md',
         ];
 
-        yield '1p2u2m, value first pivoted, subtotal' => [
+        yield '1c2r2m, value first columns, subtotal' => [
             'inputFile' => 'cube.json',
-            'unpivoted' => ['country', 'month'],
-            'pivoted' => ['@values', 'name'],
+            'rows' => ['country', 'month'],
+            'columns' => ['@values', 'name'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u2m-values-first-pivoted-subtotals.md',
+            'expectedFile' => '1c2r2m-values-first-columns-subtotals.md',
         ];
 
-        yield '1p2u2m, rollup, value last pivoted, subtotal' => [
+        yield '1c2r2m, rollup, value last columns, subtotal' => [
             'inputFile' => 'rollup.json',
-            'unpivoted' => ['name', 'country'],
-            'pivoted' => ['month', '@values'],
+            'rows' => ['name', 'country'],
+            'columns' => ['month', '@values'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u2m-rollup-values-last-pivoted-subtotals.md',
+            'expectedFile' => '1c2r2m-rollup-values-last-columns-subtotals.md',
         ];
 
-        yield '1p2u2m, rollup, value first pivoted, subtotal' => [
+        yield '1c2r2m, rollup, value first columns, subtotal' => [
             'inputFile' => 'rollup.json',
-            'unpivoted' => ['name', 'country'],
-            'pivoted' => ['@values', 'month'],
+            'rows' => ['name', 'country'],
+            'columns' => ['@values', 'month'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u2m-rollup-values-first-pivoted-subtotals.md',
+            'expectedFile' => '1c2r2m-rollup-values-first-columns-subtotals.md',
         ];
 
-        yield '1p2u2m, no grouping, value last pivoted, subtotal' => [
+        yield '1c2r2m, no grouping, value last columns, subtotal' => [
             'inputFile' => 'nogrouping.json',
-            'unpivoted' => ['name', 'country'],
-            'pivoted' => ['month', '@values'],
+            'rows' => ['name', 'country'],
+            'columns' => ['month', '@values'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u2m-no-grouping-values-last-pivoted-subtotals.md',
+            'expectedFile' => '1c2r2m-no-grouping-values-last-columns-subtotals.md',
             'hasGrouping' => false,
         ];
 
-        yield '1p2u2m, no grouping, value first pivoted, subtotal' => [
+        yield '1c2r2m, no grouping, value first columns, subtotal' => [
             'inputFile' => 'nogrouping.json',
-            'unpivoted' => ['name', 'country'],
-            'pivoted' => ['@values', 'month'],
+            'rows' => ['name', 'country'],
+            'columns' => ['@values', 'month'],
             'measures' => ['count', 'sum'],
             'subtotals' => ['name', 'country', 'month'],
-            'expectedFile' => '1p2u2m-no-grouping-values-first-pivoted-subtotals.md',
+            'expectedFile' => '1c2r2m-no-grouping-values-first-columns-subtotals.md',
             'hasGrouping' => false,
         ];
     }
