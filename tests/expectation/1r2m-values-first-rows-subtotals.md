@@ -1,0 +1,44 @@
+<table>
+  <thead>
+    <tr>
+      <th>Values</th>
+      <th colspan="2">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4">Count</td>
+      <td>itemA</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>itemB</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>itemC</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <td>All names</td>
+      <td>111</td>
+    </tr>
+    <tr>
+      <td rowspan="4">Sum</td>
+      <td>itemA</td>
+      <td>18599.41</td>
+    </tr>
+    <tr>
+      <td>itemB</td>
+      <td>21918.68</td>
+    </tr>
+    <tr>
+      <td>itemC</td>
+      <td>19313.08</td>
+    </tr>
+    <tr>
+      <td>All names</td>
+      <td>59831.17</td>
+    </tr>
+  </tbody>
+</table>

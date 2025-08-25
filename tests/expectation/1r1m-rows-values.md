@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>itemA</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>itemB</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>itemC</td>
+      <td>35</td>
+    </tr>
+  </tbody>
+</table>

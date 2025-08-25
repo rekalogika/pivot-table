@@ -1,0 +1,12 @@
+<table>
+  <thead>
+    <tr>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>111</td>
+    </tr>
+  </tbody>
+</table>
