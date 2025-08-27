@@ -19,11 +19,11 @@ use Rekalogika\PivotTable\TableToCubeAdapter\Helper\TableToCubeAdapterManager;
 final readonly class TableToCubeAdapterCube implements CubeCell
 {
     /**
-     * @param array<string,TableToCubeAdapterDimension> $tuple
+     * @param array<string,TableToCubeAdapterDimension> $coordinates
      */
     public function __construct(
         private TableToCubeAdapterManager $manager,
-        private array $tuple,
+        private array $coordinates,
         private mixed $value,
         private bool $null,
     ) {}
@@ -32,9 +32,9 @@ final readonly class TableToCubeAdapterCube implements CubeCell
      * @return array<string,TableToCubeAdapterDimension>
      */
     #[\Override]
-    public function getTuple(): array
+    public function getCoordinates(): array
     {
-        return $this->tuple;
+        return $this->coordinates;
     }
 
     #[\Override]

@@ -18,12 +18,12 @@ use Rekalogika\PivotTable\TableToCubeAdapter\IdentityStrategy;
 final readonly class DefaultIdentityStrategy implements IdentityStrategy
 {
     #[\Override]
-    public function getTupleSignature(array $tuple): string
+    public function getCoordinatesSignature(array $coordinates): string
     {
-        ksort($tuple);
+        ksort($coordinates);
         $signatureParts = [];
 
-        foreach ($tuple as $dimension) {
+        foreach ($coordinates as $dimension) {
             $signatureParts[] = \sprintf(
                 '%s:%s',
                 $dimension->getName(),

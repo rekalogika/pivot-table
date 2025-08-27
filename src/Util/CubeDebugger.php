@@ -33,7 +33,7 @@ final readonly class CubeDebugger
     public function toArray(): array
     {
         $result = [
-            'tuple' => $this->normalizeItem($this->cubeCell->getTuple()),
+            'coordinates' => $this->normalizeItem($this->cubeCell->getCoordinates()),
             'value' => $this->normalizeItem($this->cubeCell->getValue()),
         ];
 

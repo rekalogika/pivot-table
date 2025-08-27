@@ -64,19 +64,19 @@ final readonly class CubeCellDecorator implements CubeCell
     }
 
     #[\Override]
-    public function getTuple(): array
+    public function getCoordinates(): array
     {
         if ($this->subtotalKey === null) {
-            return $this->cubeCell->getTuple();
+            return $this->cubeCell->getCoordinates();
         }
 
-        $tuple = [];
+        $coordinates = [];
 
-        foreach ($this->cubeCell->getTuple() as $key => $value) {
-            $tuple[$key] = $value;
+        foreach ($this->cubeCell->getCoordinates() as $key => $value) {
+            $coordinates[$key] = $value;
         }
 
-        return $tuple;
+        return $coordinates;
     }
 
     #[\Override]
@@ -87,13 +87,13 @@ final readonly class CubeCellDecorator implements CubeCell
 
     private function getDimension(string $name): Dimension
     {
-        $tuple = $this->getTuple();
+        $coordinates = $this->getCoordinates();
 
-        if (!isset($tuple[$name])) {
+        if (!isset($coordinates[$name])) {
             throw new \InvalidArgumentException("Dimension '$name' not found in cube.");
         }
 
-        return $tuple[$name];
+        return $coordinates[$name];
     }
 
     public function getMember(string $dimensionName): mixed
@@ -185,9 +185,9 @@ final readonly class CubeCellDecorator implements CubeCell
 
     private static function getMeasureMember(CubeCell $cube): MeasureMember
     {
-        $tuple = $cube->getTuple();
+        $coordinates = $cube->getCoordinates();
 
-        $dimension = $tuple['@values']
+        $dimension = $coordinates['@values']
             ?? throw new \InvalidArgumentException("Dimension '@values' not found in cube.");
 
         $member = $dimension->getMember();
@@ -217,7 +217,7 @@ final readonly class CubeCellDecorator implements CubeCell
     public function rollUpAllExcept(array $exceptions): self
     {
         $result = $this;
-        $allDimensions = array_keys($this->getTuple());
+        $allDimensions = array_keys($this->getCoordinates());
         $dimensionsToRollUp = array_diff($allDimensions, $exceptions);
 
         foreach ($dimensionsToRollUp as $dimensionName) {
@@ -254,8 +254,8 @@ final readonly class CubeCellDecorator implements CubeCell
         array $prototypeCubeCells,
     ): iterable {
         foreach ($prototypeCubeCells as $prototypeCubeCell) {
-            $tuple = $prototypeCubeCell->getTuple();
-            $dimension = $tuple[$dimensionName]
+            $coordinates = $prototypeCubeCell->getCoordinates();
+            $dimension = $coordinates[$dimensionName]
                 ?? throw new \InvalidArgumentException("Dimension '$dimensionName' not found in prototype cube.");
 
             yield $this->slice(

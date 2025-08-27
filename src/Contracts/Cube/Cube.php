@@ -20,8 +20,8 @@ interface Cube
 {
     /**
      * Get the apex cell of the cube. The apex cell is the root cell that
-     * contains no dimensions in its tuple. It is the starting point of the
-     * cube.
+     * contains no dimensions in its coordinates. It is the starting point of
+     * the cube.
      */
     public function getApexCell(): CubeCell;
 

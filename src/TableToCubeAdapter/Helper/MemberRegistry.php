@@ -43,7 +43,7 @@ final class MemberRegistry
 
     public function registerCubeMembers(TableToCubeAdapterCube $cube): void
     {
-        foreach ($cube->getTuple() as $dimension) {
+        foreach ($cube->getCoordinates() as $dimension) {
             $dimensionName = $dimension->getName();
             $this->registerMember($dimensionName, $dimension->getMember());
         }

@@ -52,19 +52,19 @@ final readonly class TableToCubeTransformer
     {
         // create the cube without the value
 
-        $tuple = [];
+        $coordinates = [];
 
         /** @psalm-suppress MixedAssignment */
         foreach ($row->getDimensions() as $dimensionName => $member) {
             $dimension = $this->dimensionRepository
                 ->getDimension($dimensionName, $member);
 
-            $tuple[$dimensionName] = $dimension;
+            $coordinates[$dimensionName] = $dimension;
         }
 
         yield new TableToCubeAdapterCube(
             manager: $this->manager,
-            tuple: $tuple,
+            coordinates: $coordinates,
             value: null,
             null: false,
         );
@@ -79,11 +79,11 @@ final readonly class TableToCubeTransformer
             $dimension = $this->dimensionRepository
                 ->getDimension('@values', $measureMember);
 
-            $tuple['@values'] = $dimension;
+            $coordinates['@values'] = $dimension;
 
             $a = new TableToCubeAdapterCube(
                 manager: $this->manager,
-                tuple: $tuple,
+                coordinates: $coordinates,
                 value: $value,
                 null: false,
             );

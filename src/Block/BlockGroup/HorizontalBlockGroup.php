@@ -80,11 +80,11 @@ final class HorizontalBlockGroup extends BlockGroup
     protected function createPrototypeCubes(): array
     {
         $firstPivoted = $this->getContext()->getFirstPivotedKey();
-        $currentKeys = array_keys($this->getCube()->getTuple());
-        $existsInTuple = \in_array($firstPivoted, $currentKeys, true);
+        $currentKeys = array_keys($this->getCube()->getCoordinates());
+        $existsInCoordinates = \in_array($firstPivoted, $currentKeys, true);
         $childKey = $this->getChildKey();
 
-        if ($firstPivoted === null || !$existsInTuple) {
+        if ($firstPivoted === null || !$existsInCoordinates) {
             $result = $this->getContext()
                 ->getApexCubeCell()
                 ->drillDownWithoutBalancing($childKey);
