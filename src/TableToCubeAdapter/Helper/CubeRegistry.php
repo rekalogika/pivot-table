@@ -31,7 +31,7 @@ final class CubeRegistry
 
     public function registerCube(TableToCubeAdapterCube $cube): void
     {
-        $signature = $this->identityStrategy->getTupleSignature($cube->getTuple());
+        $signature = $this->identityStrategy->getCoordinatesSignature($cube->getCoordinates());
 
         if (isset($this->cubes[$signature])) {
             throw new \RuntimeException(\sprintf(
@@ -44,15 +44,15 @@ final class CubeRegistry
     }
 
     /**
-     * @param array<string,TableToCubeAdapterDimension> $tuple
+     * @param array<string,TableToCubeAdapterDimension> $coordinates
      */
-    public function getCubeByTuple(array $tuple): TableToCubeAdapterCube
+    public function getCubeByCoordinates(array $coordinates): TableToCubeAdapterCube
     {
-        $signature = $this->identityStrategy->getTupleSignature($tuple);
+        $signature = $this->identityStrategy->getCoordinatesSignature($coordinates);
 
         return $this->cubes[$signature] ??= new TableToCubeAdapterCube(
             manager: $this->manager,
-            tuple: $tuple,
+            coordinates: $coordinates,
             value: null,
             null: true,
         );

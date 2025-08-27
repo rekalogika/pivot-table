@@ -63,7 +63,7 @@ final readonly class TableToCubeAdapterManager
 
     public function getApexCube(): TableToCubeAdapterCube
     {
-        return $this->cubeRegistry->getCubeByTuple([]);
+        return $this->cubeRegistry->getCubeByCoordinates([]);
     }
 
     public function slice(
@@ -71,12 +71,12 @@ final readonly class TableToCubeAdapterManager
         string $dimensionName,
         mixed $dimensionMember,
     ): TableToCubeAdapterCube {
-        $tuple = $base->getTuple();
+        $coordinates = $base->getCoordinates();
 
-        $tuple[$dimensionName] = $this->dimensionRepository
+        $coordinates[$dimensionName] = $this->dimensionRepository
             ->getDimension($dimensionName, $dimensionMember);
 
-        return $this->cubeRegistry->getCubeByTuple($tuple);
+        return $this->cubeRegistry->getCubeByCoordinates($coordinates);
     }
 
     /**
@@ -98,10 +98,10 @@ final readonly class TableToCubeAdapterManager
         TableToCubeAdapterCube $base,
         string $dimensionName,
     ): TableToCubeAdapterCube {
-        $tuple = $base->getTuple();
+        $coordinates = $base->getCoordinates();
 
-        unset($tuple[$dimensionName]);
+        unset($coordinates[$dimensionName]);
 
-        return $this->cubeRegistry->getCubeByTuple($tuple);
+        return $this->cubeRegistry->getCubeByCoordinates($coordinates);
     }
 }

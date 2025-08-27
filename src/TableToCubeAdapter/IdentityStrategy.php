@@ -18,10 +18,10 @@ use Rekalogika\PivotTable\TableToCubeAdapter\Model\TableToCubeAdapterDimension;
 interface IdentityStrategy
 {
     /**
-     * @param array<string,TableToCubeAdapterDimension> $tuple
+     * @param array<string,TableToCubeAdapterDimension> $coordinates
      * @return string
      */
-    public function getTupleSignature(array $tuple): string;
+    public function getCoordinatesSignature(array $coordinates): string;
 
     public function getMemberSignature(mixed $member): string;
 }
