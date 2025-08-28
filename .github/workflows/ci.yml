@@ -58,7 +58,7 @@ jobs:
 
     - name: Run psalm
       run: vendor/bin/psalm
-      if: matrix.dep == 'highest' && matrix.php > '8.3'
+      if: matrix.dep == 'highest' && matrix.php >= '8.3' && matrix.php < '8.5'
 
     - name: Run phpstan
       run: vendor/bin/phpstan analyse
