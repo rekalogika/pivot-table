@@ -177,9 +177,11 @@ final readonly class CubeCellDecorator implements CubeCell
         }
 
         foreach ($this->measures as $measureName) {
-            yield $newCubes[$measureName] ?? throw new \InvalidArgumentException(
-                "Measure '$measureName' not found in the cube. Available measures: [" . implode(', ', array_keys($newCubes)) . "].",
-            );
+            $cube = $newCubes[$measureName] ?? null;
+
+            if ($cube !== null) {
+                yield $cube;
+            }
         }
     }
 
