@@ -134,7 +134,7 @@ final class PivotTableTest extends TestCase
         ];
 
         yield 'non-empty no dimension no measures' => [
-            'inputFile' => 'empty.json',
+            'inputFile' => 'cube.json',
             'rows' => [],
             'columns' => [],
             'measures' => [],
