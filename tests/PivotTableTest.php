@@ -125,12 +125,36 @@ final class PivotTableTest extends TestCase
     {
         // 1r 2c 3m = 1 rows dimensions, 2 columns dimensions, 3 measures
 
-        yield 'empty' => [
+        yield 'empty no dimension no measures' => [
+            'inputFile' => 'empty.json',
+            'rows' => [],
+            'columns' => [],
+            'measures' => [],
+            'expectedFile' => 'empty-no-dimension-no-measures.md',
+        ];
+
+        yield 'non-empty no dimension no measures' => [
+            'inputFile' => 'empty.json',
+            'rows' => [],
+            'columns' => [],
+            'measures' => [],
+            'expectedFile' => 'non-empty-no-dimension-no-measures.md',
+        ];
+
+        yield 'empty no dimension' => [
+            'inputFile' => 'empty.json',
+            'rows' => [],
+            'columns' => ['@values'],
+            'measures' => ['count', 'sum'],
+            'expectedFile' => 'empty-no-dimension.md',
+        ];
+
+        yield 'empty with rows' => [
             'inputFile' => 'empty.json',
             'rows' => ['name'],
             'columns' => ['@values'],
             'measures' => ['count', 'sum'],
-            'expectedFile' => 'empty.md',
+            'expectedFile' => 'empty-with-rows.md',
         ];
 
         yield '1m, columns values' => [
