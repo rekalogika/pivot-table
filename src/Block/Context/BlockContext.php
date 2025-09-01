@@ -199,7 +199,13 @@ final readonly class BlockContext
 
     public function doCreateSubtotalOnChildren(): bool
     {
-        return $this->subtotals[$this->getNextKey() ?? ''] ?? false;
+        $nextKey = $this->getNextKey();
+
+        if ($nextKey === null) {
+            return false;
+        }
+
+        return $this->subtotals[$nextKey] ?? false;
     }
 
     /**
