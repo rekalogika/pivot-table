@@ -29,7 +29,7 @@ final readonly class PivotTableTransformer
      * @param list<string> $columns
      * @param list<string> $skipLegends
      * @param list<string> $measures
-     * @param list<string> $withSubtotal
+     * @param array<string,bool> $subtotals
      */
     public static function transform(
         Cube $cube,
@@ -37,7 +37,7 @@ final readonly class PivotTableTransformer
         array $columns = [],
         array $measures = [],
         array $skipLegends = ['@values'],
-        array $withSubtotal = [],
+        array $subtotals = [],
     ): Table {
         $cubeCell = CubeCellDecorator::new($cube, $measures);
 
@@ -46,7 +46,7 @@ final readonly class PivotTableTransformer
             unpivoted: $rows,
             pivoted: $columns,
             skipLegends: $skipLegends,
-            withSubtotal: $withSubtotal,
+            subtotals: $subtotals,
         );
 
         return $block->generateTable();

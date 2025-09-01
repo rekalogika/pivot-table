@@ -25,7 +25,7 @@ final readonly class BlockContext
      * @param list<string> $measures
      * @param list<string> $currentKeyPath
      * @param list<string> $skipLegends
-     * @param list<string> $createSubtotals
+     * @param array<string,bool> $subtotals
      * @param int<0,max> $subtotalDepth 0 is not in subtotal, 1 is in subtotal of first level, and so on.
      * @param int<0,max> $blockDepth 0 is the root block, 1 is the child of the root block, and so on.
      */
@@ -35,7 +35,7 @@ final readonly class BlockContext
         array $pivotedKeys,
         private array $measures,
         private array $skipLegends,
-        private array $createSubtotals,
+        private array $subtotals,
         private int $subtotalDepth = 0,
         private int $blockDepth = 0,
         array $currentKeyPath = [],
@@ -60,7 +60,7 @@ final readonly class BlockContext
             measures: $this->measures,
             currentKeyPath: $this->keys->getCurrentKeyPath(),
             skipLegends: $this->skipLegends,
-            createSubtotals: $this->createSubtotals,
+            subtotals: $this->subtotals,
             subtotalDepth: $this->subtotalDepth + 1,
             blockDepth: $this->blockDepth,
         );
@@ -78,7 +78,7 @@ final readonly class BlockContext
             measures: $this->measures,
             currentKeyPath: $this->keys->getCurrentKeyPath(),
             skipLegends: $this->skipLegends,
-            createSubtotals: $this->createSubtotals,
+            subtotals: $this->subtotals,
             subtotalDepth: $this->subtotalDepth,
             blockDepth: $this->blockDepth + $amount,
         );
@@ -98,7 +98,7 @@ final readonly class BlockContext
             measures: $this->measures,
             currentKeyPath: $newPath,
             skipLegends: $this->skipLegends,
-            createSubtotals: $this->createSubtotals,
+            subtotals: $this->subtotals,
             subtotalDepth: $this->subtotalDepth,
             blockDepth: $this->blockDepth,
         );
@@ -199,7 +199,7 @@ final readonly class BlockContext
 
     public function doCreateSubtotalOnChildren(): bool
     {
-        return \in_array($this->getNextKey(), $this->createSubtotals, true);
+        return $this->subtotals[$this->getNextKey() ?? ''] ?? false;
     }
 
     /**
