@@ -25,7 +25,7 @@ final class PivotTableTest extends TestCase
      * @param list<string> $rows
      * @param list<string> $columns
      * @param list<string> $measures
-     * @param list<string> $subtotals
+     * @param array<string,bool> $subtotals
      * @param string $expectedFile
      * @dataProvider dataProvider
      */
@@ -77,7 +77,7 @@ final class PivotTableTest extends TestCase
             columns: $columns,
             measures: $measures,
             skipLegends: ['@values'],
-            withSubtotal: $subtotals ?? [],
+            subtotals: $subtotals ?? [],
         );
 
         // convert html table object to html string
@@ -119,7 +119,7 @@ final class PivotTableTest extends TestCase
     /**
      * Data provider for testPivotTable.
      *
-     * @return iterable<string,array{inputFile:string,rows:list<string>,columns:list<string>,measures:list<string>,expectedFile:string,subtotals?:list<string>,hasGrouping?:bool}>
+     * @return iterable<string,array{inputFile:string,rows:list<string>,columns:list<string>,measures:list<string>,expectedFile:string,subtotals?:array<string,bool>,hasGrouping?:bool}>
      */
     public static function dataProvider(): iterable
     {
@@ -227,7 +227,7 @@ final class PivotTableTest extends TestCase
             'rows' => ['name'],
             'columns' => ['@values'],
             'measures' => ['count'],
-            'subtotals' => ['name'],
+            'subtotals' => ['name' => true],
             'expectedFile' => '1r1m-columns-values-subtotals.md',
         ];
 
@@ -236,7 +236,7 @@ final class PivotTableTest extends TestCase
             'rows' => ['name', '@values'],
             'columns' => [],
             'measures' => ['count'],
-            'subtotals' => ['name'],
+            'subtotals' => ['name' => true],
             'expectedFile' => '1r1m-rows-values-subtotals.md',
         ];
 
@@ -261,7 +261,7 @@ final class PivotTableTest extends TestCase
             'rows' => ['name'],
             'columns' => ['@values'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name'],
+            'subtotals' => ['name' => true],
             'expectedFile' => '1r2m-columns-values-subtotals.md',
         ];
 
@@ -270,7 +270,7 @@ final class PivotTableTest extends TestCase
             'rows' => ['name', '@values'],
             'columns' => [],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name'],
+            'subtotals' => ['name' => true],
             'expectedFile' => '1r2m-rows-values-subtotals.md',
         ];
 
@@ -279,7 +279,7 @@ final class PivotTableTest extends TestCase
             'rows' => ['@values', 'name'],
             'columns' => [],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name'],
+            'subtotals' => ['name' => true],
             'expectedFile' => '1r2m-values-first-rows-subtotals.md',
         ];
 
@@ -288,7 +288,7 @@ final class PivotTableTest extends TestCase
             'rows' => [],
             'columns' => ['@values', 'name'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name'],
+            'subtotals' => ['name' => true],
             'expectedFile' => '1c2m-values-first-columns-subtotals.md',
         ];
 
@@ -297,7 +297,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['country', 'month'],
             'columns' => ['name', '@values'],
             'measures' => ['count'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r1m-values-columns-subtotals.md',
         ];
 
@@ -306,7 +310,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['country', 'month'],
             'columns' => ['name', '@values'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r2m-values-last-columns-subtotals.md',
         ];
 
@@ -315,7 +323,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['country', 'month'],
             'columns' => ['@values', 'name'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r2m-values-first-columns-subtotals.md',
         ];
 
@@ -324,7 +336,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['name', 'country'],
             'columns' => ['month', '@values'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r2m-rollup-values-last-columns-subtotals.md',
         ];
 
@@ -333,7 +349,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['name', 'country'],
             'columns' => ['@values', 'month'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r2m-rollup-values-first-columns-subtotals.md',
         ];
 
@@ -342,7 +362,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['name', 'country'],
             'columns' => ['month', '@values'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r2m-no-grouping-values-last-columns-subtotals.md',
             'hasGrouping' => false,
         ];
@@ -352,7 +376,11 @@ final class PivotTableTest extends TestCase
             'rows' => ['name', 'country'],
             'columns' => ['@values', 'month'],
             'measures' => ['count', 'sum'],
-            'subtotals' => ['name', 'country', 'month'],
+            'subtotals' => [
+                'name' => true,
+                'country' => true,
+                'month' => true,
+            ],
             'expectedFile' => '1c2r2m-no-grouping-values-first-columns-subtotals.md',
             'hasGrouping' => false,
         ];

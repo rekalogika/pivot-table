@@ -119,7 +119,7 @@ abstract class Block implements \Stringable
      * @param list<string> $pivoted
      * @param list<string> $measures
      * @param list<string> $skipLegends
-     * @param list<string> $withSubtotal
+     * @param array<string,bool> $subtotals
      */
     final public static function new(
         CubeCellDecorator $cubeCell,
@@ -127,7 +127,7 @@ abstract class Block implements \Stringable
         array $pivoted = [],
         array $measures = [],
         array $skipLegends = ['@values'],
-        array $withSubtotal = [],
+        array $subtotals = [],
     ): Block {
         $context = new BlockContext(
             apexCubeCell: $cubeCell,
@@ -135,7 +135,7 @@ abstract class Block implements \Stringable
             pivotedKeys: $pivoted,
             measures: $measures,
             skipLegends: $skipLegends,
-            createSubtotals: $withSubtotal,
+            subtotals: $subtotals,
         );
 
         return new RootBlock($cubeCell, $context);
